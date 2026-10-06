@@ -3,7 +3,7 @@
 
 ///////////////////////////////////////INICIO PARTE MODIFICABLE
 //si hace falta definicion de constantes se ponen aqui
-#define MAX_RETO 20
+#define MAX_RETO 150
 typedef struct
 {
     char titulo[MAX_RETO];

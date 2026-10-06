@@ -8,6 +8,8 @@
 void _imprimirCreador(TIPOELEMENTOABB creador);
 void _imprimirCola(TCOLA *cola);
 void _imprimirReto(TIPOELEMENTOCOLA reto, int numero);
+void _introducirRetosCola(TCOLA *cola);
+void _nuevosRetos(TABB *A);
 
 //Elimina el cambio de linea final si uso gets() o fgets()
 void _strip_line(char *linea); 
@@ -49,8 +51,14 @@ void inicializarCreadores(TABB *A, int nparam, char **args) {
             n++;
             switch (n) {
                 case 1: //alias
-                    // ANHADE EL CODIGO PARA COPIAR EL token EN EL CAMPO alias DEL CREADOR CON strncpyç X
+                    // ANHADE EL CODIGO PARA COPIAR EL token EN EL CAMPO alias DEL CREADOR CON strncpy X
                     strncpy(creador.alias,token,MAX_ALIAS);
+                    int len = strlen(creador.alias);
+                    while (len > 0 && (creador.alias[len - 1] == ' ' || creador.alias[len - 1] == '\r' || creador.alias[len - 1] == '\n')) {
+                        creador.alias[len - 1] = '\0';
+                        len--;
+                    }
+                    break;
                     break;
                 case 2: //categoria
                     // ANHADE EL CODIGO PARA COPIAR EL token EN EL CAMPO categoria DEL CREADOR CON atoi X
@@ -144,23 +152,7 @@ void anhadirCreador(TABB *A) {
 
     // Retos pendientes con bucle hasta "fin"
     crearCola(&creador.retos);
-    printf("Introduce los retos (escribe 'fin' en el titulo para terminar):\n");
-    
-    while (1) {
-        printf("Titulo del reto (fin para finalizar): ");
-        scanf("%s", reto.titulo); // (Usa fgets si el título tiene espacios, pero recuerda limpiar el salto de línea)
-        
-        // "fin", salimos del bucle de retos
-        if (strcmp(reto.titulo, "fin") == 0) {
-            break;
-        }
-        
-        printf("Dificultad (1-5): ");
-        scanf("%d", &reto.dificultad);
-
-        // Insertamos el reto en la cola del creador
-        insertarCola(&creador.retos, reto);
-    }
+    _introducirRetosCola(&creador.retos);
 
     // Descripción
     printf("Descripcion: ");
@@ -235,13 +227,54 @@ void _splitByComma(char *cadena, TCOLA *cola) {
     strncpy(cadenareto, start, MAX_RETO);//MAX_RETO se lee de cola.h
 
     // MODIFICA LA SIGUIENTE LINEA SUSTITUYENDO LOS DATOS ENTRE <> POR LAS VARIABLES QUE SE INDICAN
-    //sscanf(cadenareto, " %[^:]:%d", <campo titulo de la variable reto>, <campos dificultad de la variable reto>);
+    sscanf(cadenareto, " %[^:]:%d", reto.titulo, &reto.dificultad);
 
     
     //ANHADE EL CODIGO PARA INSERTAR EL RETO EN LA COLA
+    insertarCola(cola,reto);
     
+}
+void nuevosRetos(TABB *A) {
+    char aliasBuscar[MAX_ALIAS];
+    TIPOELEMENTOABB creador;
+
+    printf("Introduce el alias del creador para añadir nuevos retos: ");
+    scanf("%s", aliasBuscar);
+
+    if (esMiembroAbb(*A, creador)) {
+        // Buscar si creador existe en árbol
+        buscarNodoAbb(*A, aliasBuscar, &creador);
+
+        printf("Creador encontrado: %s\n", creador.alias);
+        
+        // Añadir retos
+        _introducirRetosCola(&creador.retos);
+
+        // Actualizar nodo en el árbol con la nueva cola modificada
+        modificarElementoAbb(*A, creador);
+
+        printf("Nuevos retos añadidos correctamente.\n");
+    } else {
+        printf("Error: No existe ningún creador con el alias '%s'.\n", aliasBuscar);
+    }
+}
+void _introducirRetosCola(TCOLA *cola) {
+    TIPOELEMENTOCOLA reto;
+    printf("Introduce los retos (escribe 'fin' en el titulo para terminar):\n");
     
-    
+    while (1) {
+        printf("Titulo del reto (fin para finalizar): ");
+        scanf("%s", reto.titulo);
+        
+        if (strcmp(reto.titulo, "fin") == 0) {
+            break;
+        }
+        
+        printf("Dificultad (1-5): ");
+        scanf("%d", &reto.dificultad);
+
+        insertarCola(cola, reto);
+    }
 }
 void _imprimirCreador(TIPOELEMENTOABB creador) {
     // Alias pegado al borde izquierdo

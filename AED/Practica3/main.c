@@ -3,6 +3,8 @@
 #include <ctype.h>
 #include "creatorverse.h"
 
+void nuevosRetos(TABB *A);
+
 void ejecutarMenu(TABB *arbol) {
     bool activo = true;
     char entrada;
@@ -26,15 +28,16 @@ void ejecutarMenu(TABB *arbol) {
             printf("\nGracias por usar nuestro programa\n");
             break;
          case 'a':
-            anhadirCreador(arbol);
+                anhadirCreador(arbol);
             break;
          case 'l':
                 listarCreadores(*arbol);
             break;
          case 'e':
-            eliminarCreador(arbol);
+                eliminarCreador(arbol);
             break;
          case 'n':
+                nuevosRetos(arbol);
             break;
          case 'c':
             break;
