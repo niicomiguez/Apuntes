@@ -1,12 +1,4 @@
-LunaByte |1| SoundLab |13707|0| -| Streamer de juegos cooperativos y retos
-propuestos por la comunidad |
-KiroBeat |2| IndieForge |22833|1| Componer una pieza con sonidos de teclado :4|
-Productor de contenidos audiovisuales inspirados en ítecnologa y úmsica
-óelectrnica |
-NekoRush |3| ArcadeHub |31959|1| Analizar una derrota y proponer mejoras :3 ,
-Jugar una partida con una estrategia aleatoria :3| Participante
-competitivo que entrena retos de óprecisin y estrategia |
-AdaLoop |4| NightOwls |41085|1| Entrevistar a un desarrollador independiente :2 ,
-Desmontar tres mitos sobre óprogramacin :3 , Grabar un episodio sin usar
-anglicismos :4| Podcaster de ítecnologa que explica áinformtica mediante
-ejemplos cotidianos |
+LunaByte |1| SoundLab |13707|0| -| Streamer de juegos cooperativos y retos propuestos por la comunidad |
+KiroBeat |2| IndieForge |22833|1| Componer una pieza con sonidos de teclado :4| Productor de contenidos audiovisuales inspirados en tecnologia y musica electronica |
+NekoRush |3| ArcadeHub |31959|1| Analizar una derrota y proponer mejoras :3 , Jugar una partida con una estrategia aleatoria :3| Participante competitivo que entrena retos de precision y estrategia |
+AdaLoop |4| NightOwls |41085|1| Entrevistar a un desarrollador independiente :2 , Desmontar tres mitos sobre programacion :3 , Grabar un episodio sin usar anglicismos :4| Podcaster de tecnologia que explica informatica mediante ejemplos cotidianos |

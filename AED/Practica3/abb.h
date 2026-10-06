@@ -16,7 +16,7 @@ typedef struct {
     char alias[MAX_ALIAS];
     int categoria;
     char colectivo[MAX_COLEC];
-    int seguidores;
+    long seguidores;
     int verificado;
     TCOLA retos;
     char descripcion[MAX_DESC];

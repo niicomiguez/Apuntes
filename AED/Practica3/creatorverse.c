@@ -5,6 +5,9 @@
 
 //FUNCIONES PRIVADAS: su prototipo no esta en creatorverse.h
 //Listado de los prototipos de las funciones privadas
+void _imprimirCreador(TIPOELEMENTOABB creador);
+void _imprimirCola(TCOLA *cola);
+void _imprimirReto(TIPOELEMENTOCOLA reto, int numero);
 
 //Elimina el cambio de linea final si uso gets() o fgets()
 void _strip_line(char *linea); 
@@ -40,6 +43,7 @@ void inicializarCreadores(TABB *A, int nparam, char **args) {
     while (fgets(linea, sizeof (linea), fp)) {
         _strip_line(linea); //elimino el cambio de linea final
         token = strtok(linea, "|"); //primer token
+        
         int n = 0; //tengo 7 campos, contador de campos
         while (n < 7) {
             n++;
@@ -66,13 +70,12 @@ void inicializarCreadores(TABB *A, int nparam, char **args) {
                     break;
                 case 6: //cola de retos separados por comas
                     // ANHADE EL CODIGO PARA CREAR LA COLA DE RETOS DEL CREADOR ACTUAL X
-                    crearCola(creador.retos);
+                    crearCola(&creador.retos);
                     // ANHADE EL CODIGO SIGUIENTE: SI token ES DISTINTO DE "-", LLAMAS A LA FUNCIÓN
                     if (strcmp(token,"-"))
                     {
-                        _splitByComma(token,creador.retos);
+                        _splitByComma(token,&creador.retos);
                     }
-                    
                     // _splitByComma MODIFICANDO LA SIGUIENTE LINEA SUSTITUYENDO EL DATO ENTRE <> POR LA VARIABLE QUE SE INDICA
                          //_splitByComma(token, <cola de retos del creador>)
                     break;
@@ -85,7 +88,11 @@ void inicializarCreadores(TABB *A, int nparam, char **args) {
 
         }
         //ANHADE EL CODIGO PARA INSERTAR EL CREADOR EN EL ARBOL SOLO SI NO ES MIEMBRO DEL ARBOL
-
+        if (!esMiembroAbb(*A,creador))
+        {
+            insertarElementoAbb(A,creador);
+        }
+        
     }
     fclose(fp);
 }
@@ -94,8 +101,20 @@ void anhadirCreador(TABB *A){
     
 }
 
-void listarCreadores(TABB A){
-    
+void listarCreadores(TABB A) {
+    TIPOELEMENTOABB creador;
+
+    if (!esAbbVacio(A)) {
+        // Recorrer los menores (izquierda)
+        listarCreadores(izqAbb(A));
+
+        // Leer el nodo actual y llamar a la función en cadena
+        leerElementoAbb(A, &creador);
+        _imprimirCreador(creador);
+
+        // Recorrer los mayores (derecha)
+        listarCreadores(derAbb(A));
+    }
 }
 
 void eliminarCreador(TABB *A){
@@ -128,10 +147,10 @@ void _splitByComma(char *cadena, TCOLA *cola) {
             // podemos separar los campos de cada reto de forma facil con sscanf
 
             // MODIFICA LA SIGUIENTE LINEA SUSTITUYENDO LOS DATOS ENTRE <> POR LAS VARIABLES QUE SE INDICAN
-            // sscanf(cadenareto, " %[^:]:%d", <campo titulo de la variable reto>, <campos dificultad de la variable reto>);
+            sscanf(cadenareto, " %[^:]:%d",reto.titulo, &reto.dificultad);
             
             //ANHADE EL CODIGO PARA INSERTAR EL RETO EN LA COLA
-
+            insertarCola(cola, reto);
 
             start = end + 1;
         }
@@ -150,6 +169,64 @@ void _splitByComma(char *cadena, TCOLA *cola) {
     
     
     
+}
+void _imprimirCreador(TIPOELEMENTOABB creador) {
+    // Alias pegado al borde izquierdo
+    // %s = Imprimir Strings
+    // \n = salto de línea
+    printf("Alias: %s\n", creador.alias);
+    
+    // \t para aplicar la sangría
+    // %d = imprimir ints
+    printf("\tCategoria: %d\n", creador.categoria);
+    
+    if (strcmp(creador.colectivo, "-") != 0) {
+        printf("\tColectivo: %s\n", creador.colectivo);
+    }
+    
+    // %ld = imprimir longs
+    printf("\tSeguidores: %ld\n", creador.seguidores);
+    
+    if (creador.verificado == 1) {
+        printf("\tVerificado: Si\n");
+    }
+    
+    if (!esVaciaCola(creador.retos)) {
+        printf("\tRetos:\n");
+        _imprimirCola(&creador.retos);
+    }
+    
+    printf("\tDescripcion: %s\n", creador.descripcion);
+}
+
+void _imprimirCola(TCOLA *cola) {
+    // Código para crear la cola auxiliar, el bucle de desencolado/encolado y la restauración
+    TCOLA colaAuxiliar;
+    crearCola(&colaAuxiliar);
+    int contador=1;
+    TIPOELEMENTOCOLA elementoActual;
+    while (!esVaciaCola(*cola))
+    {
+        elementoActual=primeroCola(*cola);
+        _imprimirReto(elementoActual,contador);
+
+        insertarCola(&colaAuxiliar,elementoActual);
+        suprimirCola(cola);
+        contador+=1;
+    }
+    while (!esVaciaCola(colaAuxiliar))
+    {
+        elementoActual=primeroCola(colaAuxiliar);
+        insertarCola(cola,elementoActual);
+        suprimirCola(&colaAuxiliar);
+    }
+    destruirCola(&colaAuxiliar);
+    
+}
+
+void _imprimirReto(TIPOELEMENTOCOLA reto, int numero) {
+    // Código con el printf para mostrar el número, título y dificultad del reto
+    printf("\t%d. %s [dificultad: %d] \n",numero,reto.titulo,reto.dificultad);
 }
 
 //Funcion para eliminar el cambio de linea si uso gets() o fgets()

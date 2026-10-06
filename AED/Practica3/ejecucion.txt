@@ -1,0 +1,2 @@
+gcc main.c creatorverse.c abb.c cola.c -o creatorverse.exe
+.\creatorverse.exe -f creators4.txt

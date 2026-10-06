@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <ctype.h>
+#include "creatorverse.h"
 
-void ejecutarMenu() {
+void ejecutarMenu(TABB *arbol) {
     bool activo = true;
     char entrada;
     
@@ -22,10 +23,12 @@ void ejecutarMenu() {
         {
         case 's':
             activo = false;
+            printf("\nGracias por usar nuestro programa\n");
             break;
          case 'a':
             break;
          case 'l':
+                listarCreadores(*arbol);
             break;
          case 'e':
             break;
@@ -41,7 +44,18 @@ void ejecutarMenu() {
     }
 }
 
-int main() {
-    ejecutarMenu();
+int main(int argc, char *argv[]) {
+    // Declarar el árbol
+    TABB miArbol; 
+    
+    // Iniciamos creando el arbol y leyendo el archivo si se pasa por parámetro
+    inicializarCreadores(&miArbol, argc, argv);
+
+    // Ejecutar el menú pasándole la dirección de nuestro árbol
+    ejecutarMenu(&miArbol);
+
+    // Destrucción al acabar ejecución
+    destruirAbb(&miArbol);
+
     return 0;
 }

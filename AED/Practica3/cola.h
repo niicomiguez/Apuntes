@@ -3,13 +3,12 @@
 
 ///////////////////////////////////////INICIO PARTE MODIFICABLE
 //si hace falta definicion de constantes se ponen aqui
-#define MAX_TITULO 20
+#define MAX_RETO 20
 typedef struct
 {
-    char titulo[MAX_TITULO];
+    char titulo[MAX_RETO];
     int dificultad;
-};
- TIPOELEMENTOCOLA;
+}TIPOELEMENTOCOLA;
 //////////////////////////////////////////FIN PARTE MODIFICABLE
 
 //definicion del tipo opaco
