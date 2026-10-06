@@ -10,6 +10,10 @@ void _imprimirCola(TCOLA *cola);
 void _imprimirReto(TIPOELEMENTOCOLA reto, int numero);
 void _introducirRetosCola(TCOLA *cola);
 void _nuevosRetos(TABB *A);
+void _completarReto(TABB *A,TCOLA *cola);
+void guardarBaseDatos(TABB A, int argc, char **argv);
+void _guardarPreorden(TABB A, FILE *fp);
+void _guardarRetosCola(TCOLA *cola, FILE *fp);
 
 //Elimina el cambio de linea final si uso gets() o fgets()
 void _strip_line(char *linea); 
@@ -53,12 +57,6 @@ void inicializarCreadores(TABB *A, int nparam, char **args) {
                 case 1: //alias
                     // ANHADE EL CODIGO PARA COPIAR EL token EN EL CAMPO alias DEL CREADOR CON strncpy X
                     strncpy(creador.alias,token,MAX_ALIAS);
-                    int len = strlen(creador.alias);
-                    while (len > 0 && (creador.alias[len - 1] == ' ' || creador.alias[len - 1] == '\r' || creador.alias[len - 1] == '\n')) {
-                        creador.alias[len - 1] = '\0';
-                        len--;
-                    }
-                    break;
                     break;
                 case 2: //categoria
                     // ANHADE EL CODIGO PARA COPIAR EL token EN EL CAMPO categoria DEL CREADOR CON atoi X
@@ -104,8 +102,6 @@ void inicializarCreadores(TABB *A, int nparam, char **args) {
     }
     fclose(fp);
 }
-
-
 
 void listarCreadores(TABB A) {
     TIPOELEMENTOABB creador;
@@ -186,7 +182,6 @@ void eliminarCreador(TABB *A){
     }
 }
 
-
 ///////////////////////////////////////////////////////
 //FUNCIONES PRIVADAS
 //////////////////////////////////////////////
@@ -241,10 +236,11 @@ void nuevosRetos(TABB *A) {
     printf("Introduce el alias del creador para añadir nuevos retos: ");
     scanf("%s", aliasBuscar);
 
-    if (esMiembroAbb(*A, creador)) {
-        // Buscar si creador existe en árbol
-        buscarNodoAbb(*A, aliasBuscar, &creador);
+    buscarNodoAbb(*A, aliasBuscar, &creador);
+    // Buscar si creador existe en árbol
 
+    if (esMiembroAbb(*A, creador)) {
+        
         printf("Creador encontrado: %s\n", creador.alias);
         
         // Añadir retos
@@ -300,6 +296,8 @@ void _imprimirCreador(TIPOELEMENTOABB creador) {
     if (!esVaciaCola(creador.retos)) {
         printf("\tRetos:\n");
         _imprimirCola(&creador.retos);
+    }else{
+        printf("\tNo hay retos disponibles\n");
     }
     
     printf("\tDescripcion: %s\n", creador.descripcion);
@@ -331,11 +329,121 @@ void _imprimirCola(TCOLA *cola) {
 }
 
 void _imprimirReto(TIPOELEMENTOCOLA reto, int numero) {
-    // Código con el printf para mostrar el número, título y dificultad del reto
-    printf("\t%d. %s [dificultad: %d] \n",numero,reto.titulo,reto.dificultad);
+    
+    printf("\t\t%d. %s [dificultad: %d] \n", numero, reto.titulo, reto.dificultad);
+    
 }
 
 //Funcion para eliminar el cambio de linea si uso gets() o fgets()
 void _strip_line(char *linea) {
     linea[strcspn(linea, "\r\n")] = 0;
+}
+
+void completarReto(TABB *A) {
+    char aliasBuscar[MAX_ALIAS];
+    TIPOELEMENTOABB creador;
+
+    printf("Alias del creador que quiere completar el reto : ");
+    scanf("%s", aliasBuscar);
+
+    buscarNodoAbb(*A, aliasBuscar, &creador);
+
+    if (esMiembroAbb(*A, creador)) {
+        
+
+        if (!esVaciaCola(creador.retos)) {
+            TIPOELEMENTOCOLA retoActual = primeroCola(creador.retos);
+            printf("\nReto completado : %s [dificultad: %d]\n", retoActual.titulo, retoActual.dificultad);
+            
+            suprimirCola(&creador.retos);
+
+            if (!esVaciaCola(creador.retos)) {
+                TIPOELEMENTOCOLA retoSiguiente = primeroCola(creador.retos);
+                printf("Siguiente reto : %s [dificultad: %d]\n", retoSiguiente.titulo, retoSiguiente.dificultad);
+            } else {
+                printf("Este creador no tiene mas retos\n");
+            }
+
+            modificarElementoAbb(*A, creador);
+        } else {
+            printf("\nEste creador no tiene retos pendientes.\n");
+        }
+    } else {
+        printf("\nError: No existe ningun creador con el alias '%s'.\n", aliasBuscar);
+    }
+}
+
+// Función auxiliar para escribir los retos en formato "titulo:dif,titulo:dif|"
+void _guardarRetosCola(TCOLA *cola, FILE *fp) {
+    if (esVaciaCola(*cola)) {
+        fprintf(fp, "-|");
+        return;
+    }
+    
+    TCOLA colaAux;
+    crearCola(&colaAux);
+    TIPOELEMENTOCOLA reto;
+    int primero = 1;
+
+    while (!esVaciaCola(*cola)) {
+        reto = primeroCola(*cola);
+        
+        // Si no es el primero, se imprime coma separadora
+        if (!primero) {
+            fprintf(fp, ",");
+        }
+        fprintf(fp, "%s:%d", reto.titulo, reto.dificultad);
+        
+        primero = 0;
+        insertarCola(&colaAux, reto);
+        suprimirCola(cola);
+    }
+    fprintf(fp, "|"); 
+
+    // Restaurar cola original
+    while (!esVaciaCola(colaAux)) {
+        insertarCola(cola, primeroCola(colaAux));
+        suprimirCola(&colaAux);
+    }
+    destruirCola(&colaAux);
+}
+
+// Recorrido PREORDEN para guardar los datos (Raíz, Izquierda, Derecha)
+void _guardarPreorden(TABB A, FILE *fp) {
+    if (!esAbbVacio(A)) {
+        TIPOELEMENTOABB creador;
+        leerElementoAbb(A, &creador);
+        
+        // Escribir la raíz (el creador actual)
+        fprintf(fp, "%s|%d|%s|%ld|%d|", creador.alias, creador.categoria, creador.colectivo, creador.seguidores, creador.verificado);
+        _guardarRetosCola(&creador.retos, fp);
+        fprintf(fp, "%s|\n", creador.descripcion);
+        
+        // Recorrer subárbol izquierdo y luego derecho
+        _guardarPreorden(izqAbb(A), fp);
+        _guardarPreorden(derAbb(A), fp);
+    }
+}
+
+// Función guardado
+void guardarBaseDatos(TABB A, int argc, char **argv) {
+    char nombreFichero[100];
+    
+    // Comprobación si se indica archivo
+    if (argc >= 3 && strcmp(argv[1], "-f") == 0) {
+        strcpy(nombreFichero, argv[2]);
+    } else {
+        printf("\nNo se detecta archivo inicial. Introduce el nombre del fichero para guardar (ej: salida.txt): ");
+        scanf("%s", nombreFichero);
+    }
+
+    FILE *fp = fopen(nombreFichero, "wt"); // "wt" = Write Text
+    if (fp == NULL) {
+        printf("Error al abrir el archivo %s para escritura.\n", nombreFichero);
+        return;
+    }
+
+    _guardarPreorden(A, fp);
+    fclose(fp);
+    printf("\nDatos guardados correctamente en '%s' usando recorrido preorden.\n", nombreFichero);
 }
