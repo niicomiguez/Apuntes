@@ -26,11 +26,13 @@ void ejecutarMenu(TABB *arbol) {
             printf("\nGracias por usar nuestro programa\n");
             break;
          case 'a':
+            anhadirCreador(arbol);
             break;
          case 'l':
                 listarCreadores(*arbol);
             break;
          case 'e':
+            eliminarCreador(arbol);
             break;
          case 'n':
             break;

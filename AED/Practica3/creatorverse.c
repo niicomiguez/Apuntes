@@ -97,9 +97,7 @@ void inicializarCreadores(TABB *A, int nparam, char **args) {
     fclose(fp);
 }
 
-void anhadirCreador(TABB *A){
-    
-}
+
 
 void listarCreadores(TABB A) {
     TIPOELEMENTOABB creador;
@@ -117,8 +115,83 @@ void listarCreadores(TABB A) {
     }
 }
 
-void eliminarCreador(TABB *A){
+void anhadirCreador(TABB *A) {
+    TIPOELEMENTOABB creador;
+    char respuesta[100];
+    TIPOELEMENTOCOLA reto;
+
+    printf("Introduce los datos del nuevo creador:\n");
     
+    // Alias
+    printf("Alias: ");
+    scanf("%s", creador.alias); // o fgets si quieres admitir espacios, pero ten cuidado con el buffer
+
+    // Categoría (1 a 5)
+    printf("Categoria (1-5): ");
+    scanf("%d", &creador.categoria);
+
+    // Colectivo (- si desconocido)
+    printf("Colectivo (- si desconocido): ");
+    scanf("%s", creador.colectivo);
+
+    // Seguidores
+    printf("Seguidores: ");
+    scanf("%ld", &creador.seguidores);
+
+    // Verificado (0/1)
+    printf("Verificado (0/1): ");
+    scanf("%d", &creador.verificado);
+
+    // Retos pendientes con bucle hasta "fin"
+    crearCola(&creador.retos);
+    printf("Introduce los retos (escribe 'fin' en el titulo para terminar):\n");
+    
+    while (1) {
+        printf("Titulo del reto (fin para finalizar): ");
+        scanf("%s", reto.titulo); // (Usa fgets si el título tiene espacios, pero recuerda limpiar el salto de línea)
+        
+        // "fin", salimos del bucle de retos
+        if (strcmp(reto.titulo, "fin") == 0) {
+            break;
+        }
+        
+        printf("Dificultad (1-5): ");
+        scanf("%d", &reto.dificultad);
+
+        // Insertamos el reto en la cola del creador
+        insertarCola(&creador.retos, reto);
+    }
+
+    // Descripción
+    printf("Descripcion: ");
+    scanf(" %[^\n]", creador.descripcion); 
+
+    // Comprobar si ya existe en el árbol antes de insertar
+    if (!esMiembroAbb(*A, creador)) {
+        insertarElementoAbb(A, creador);
+        printf("Creador anhadido correctamente a la base de datos.\n");
+    } else {
+        printf("Error: Ya existe un creador con ese alias.\n");
+        // Si no se inserta, destruir su cola
+        destruirCola(&creador.retos);
+    }
+}
+void eliminarCreador(TABB *A){
+    char aliasBuscar[MAX_ALIAS];
+    TIPOELEMENTOABB creadorEncontrado;
+
+    printf("Introduce el alias del creador a eliminar: ");
+    scanf("%s", aliasBuscar);
+
+    buscarNodoAbb(*A,aliasBuscar,&creadorEncontrado);
+
+    // Borrar si existe en bd
+    if (esMiembroAbb(*A, creadorEncontrado)) { 
+        suprimirElementoAbb(A, creadorEncontrado);
+        printf("El creador %s ha sido eliminado de la base de datos\n", aliasBuscar);
+    } else {
+        printf("El creador con alias %s no existe en la base de datos.\n", aliasBuscar);
+    }
 }
 
 
