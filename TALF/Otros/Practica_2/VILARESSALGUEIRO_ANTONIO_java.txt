@@ -1,0 +1,229 @@
+import java.io.*;                    
+import java.util.*;                  
+
+public class Maquina {              
+   
+    private final List<String> estados;//Conjunto de estados
+    private final List<String> estadosFinales;// Estados de aceptación
+    private final List<String> alfabeto;//Símbolos permitidos 
+    private final List<List<List<String>>> tabla;// Tabla de transiciones
+    private List<String> actual;// Estado(s) actual(es)
+
+    public Maquina(List<String> estados, List<String> estadosFinales, List<String> alfabeto, List<List<List<String>>> tabla) { 
+        this.estados = estados;
+        this.estadosFinales = estadosFinales;
+        this.alfabeto = alfabeto;
+        this.tabla = tabla; 
+        List<String> u = new ArrayList<>();
+        u.add(estados.get(0));// Primer estado como inicial
+        this.actual = cierre(u);// Cierre λ del inicial
+    }
+
+    // Cierre λ: alcanza todos los estados por λ desde 'estado'
+    private List<String> cierre(List<String> estado) {
+        List<String> ret = new ArrayList<>();// Resultado acumulado
+        if (!estado.isEmpty()) {//Mientras nos encontremos en un estado
+            List<String> ter = new ArrayList<>(); //Creo un array temporal para almacenar los nuevos estados alcanzables
+            ret = new ArrayList<>(new HashSet<>(estado));//Empiezo desde el propio conjunto
+            while (true) {  
+                for (String i : ret) { 
+                    List<String> aux = new ArrayList<>(); 
+                    aux.add(i);//Por cada estado alcanzado lo incluyo en una lista temporal
+                    for (String j : trans(aux, "λ")) {// Transiciones por λ
+                        ter.add(j);// Añadir estados posibles
+                    }
+                }
+                ter = new ArrayList<>(new HashSet<>(ter)); //Elimino duplicados
+                ter.removeIf(s -> s.equals(""));//Quito espacios vacíos
+                if (new HashSet<>(ret).equals(new HashSet<>(ter))) {//en caso de que no haya cambios
+                    break;                                 
+                } else {
+                    ret = ter;//Ahora uso los nuevos estados alcanzables como base para seguir buscando
+                    ter = new ArrayList<>();//Elimino el que cree temporal               
+                }
+            }
+        } else {
+            ret.add("");// Si no hay estado
+        }
+
+
+        Collections.sort(ret);//Ordeno 
+        return ret;//Devuelve la lista de todos los estados alcanzables
+    }
+
+    // Transición  desde un estado 'estado' segun la propia 'entrada'
+    private List<String> trans(List<String> estado, String entrada) {
+        
+        List<String> ret = new ArrayList<>();//Creo un array para almacenar dichos estados
+        if (!alfabeto.contains(entrada)) {// Si símbolo no está
+            ret.add("");//No se puede alcanzar ningun estado
+            return ret;
+        } else {
+            for (String e : estado) {// Recorro cada estado
+                if (e.equals("")) {
+                    ret.add("");
+                } else {
+                    if (entrada.equals("λ")) {              // λ mantiene el estado
+                        ret.add(e);
+                    }
+                    try {
+                        
+                        int posEstado = estados.indexOf(e); //Busco la fila en la tabla 
+                        int posEntrada = alfabeto.indexOf(entrada);//Busco la columna en la tabla (todo para saber que estados se alcanzan)
+                        List<String> destino = tabla.get(posEstado).get(posEntrada);//Posibles estados 
+                        ret.addAll(destino);//Guardo los estados alcanzables
+
+                    } catch (Exception ex) {//En caso de error
+                        System.out.println(" + Error: " + e + " " + estado + " " + entrada);
+                    }
+                }
+            }
+            ret = new ArrayList<>(new HashSet<>(ret));// Se sacan los estados  duplicados
+            ret.removeIf(s -> s.equals(""));//QUitamos los estados vacions
+            if (ret.isEmpty()) ret.add("");// Si no se puede alcanzar ningun estado queda vacio
+            return ret;
+        }
+    }
+
+    // Delta: procesa una cadena símbolo a símbolo y aplica cierre al final
+    public List<String> delta(List<String> estado, String entrada) {
+
+        List<String> ret = new ArrayList<>();//En este array almaceno los estados resultantes
+        for (char i : entrada.toCharArray()) {// Recorro cada entrada
+            String caracter = String.valueOf(i);
+
+            if (!alfabeto.contains(caracter)) {//CCompruebo que estea en el alfabeto
+                ret.clear(); //Limpio el array
+                ret.add("");                            
+                return ret;                   
+            } else {
+                List<String> aux = trans(estado, caracter);//Estados alcanzables con el simbolo actual
+                ret.addAll(aux); //Los almaceno en la lista
+            }
+        }
+        ret = cierre(ret);//Cierre del final
+        return ret;//Estados resultantes
+    }
+
+
+    // Muestra por pantalla los datos básicos del autómata
+    public void mostrardatos() {
+        System.out.println(" Estado actual: " + this.actual);
+        System.out.println(" Alfabeto: " + this.alfabeto);
+        System.out.println(" Estados finales: " + this.estadosFinales);
+        System.out.println(" Estados: " + this.estados);
+        
+        System.out.println();
+    }
+
+    // Devuelve true si alguno de 'estados' es final
+    public boolean aceptar(List<String> estados) {
+        for (String i : estados) {
+            if (estadosFinales.contains(i)) return true;
+        }
+        return false;
+    }
+
+
+
+    public static Maquina loadFile(String ruta) throws IOException {//Cargo la maquina con los datos del archivo
+
+        String linea;//linea de entrada
+        int i = 0;
+        List<String> estados = new ArrayList<>();//Almaceno los estados leídos
+        List<String> estadosFinales = new ArrayList<>();//Almaceno los estados finales s
+        List<String> alfabeto = new ArrayList<>();//Alfabeto 
+        List<List<List<String>>> tabla = new ArrayList<>();//Almaceno la tabla de transiciones(se guarda como una lista de listas y dentro contiene los estados a los que se puede llegar a partir de el estado actual con el símbolo que se lee)
+        
+        try (BufferedReader file = new BufferedReader(new FileReader(ruta))) {
+           
+            while ((linea = file.readLine()) != null) {//Mientras no se termine el archivo
+                i++;
+                linea = linea.replace("\n", "");//Elimino los saltos de linea
+                if (i == 1) {//En la primera linea simpre se indican los estados
+                    
+                    estados = Arrays.asList(linea.split(" "));//Divido la linea en palabras 
+                    estados = new ArrayList<>(estados.subList(1, estados.size()));//Guardo los estados en la lista, no  almaceno la primera palabra que se lee ya que es el numero total de estados
+                } else if (i == 2) {//Linea correspondiente a los estados finales
+                    estadosFinales = Arrays.asList(linea.split(" "));//Hago lo mismo, tomo los estados individualmente y los almaceno en una lista
+                    estadosFinales = new ArrayList<>(estadosFinales.subList(1, estadosFinales.size()));//Creo una lista sin tomar el primer elemento que es la suma total de los estados finales
+                
+                } else if (i == 3) {//LInea correspondiente al alfabeto
+                    alfabeto = Arrays.asList(linea.split(" "));//Hago lo mismo que en las otras dos
+                    alfabeto = new ArrayList<>(alfabeto.subList(1, alfabeto.size()));
+                    alfabeto.add("λ");//Añado el símbolo lambda al alfabeto 
+                } else if (i == 4) {//Creola tabla de las transaccions que primero la creo vacia y luego le introduzco los datos
+                    for (String estTmp : estados) {//Para cada estado creo una fila
+                        
+                        List<List<String>> fila = new ArrayList<>();
+                        for (String sigTmp : alfabeto) {//Por cada simbolo del alfabeto creo una columna
+                            fila.add(new ArrayList<>());
+                        }
+                        tabla.add(fila);//Añado la fila a la tabla
+                    }
+                } else if (i > 4 && (i - 5) < estados.size()) {//Aqui comienzo a leeer la tabla de los estados (i>4 porque empieza en la fila 5 y i-5 porque es el restante de lineas) y introduzco los datos en la tabla anterior
+                    String[] t = linea.split("#");
+                    for (int j = 0; j < alfabeto.size(); j++) {//Recorro cada columna
+                        if (j < t.length) {
+
+                            String s = t[j].trim();//Cojo la cadena de la celda
+                            List<String> transList = Arrays.asList(s.split(" "));//Divido la cadena en palabras
+                            tabla.get(i - 5).set(j, new ArrayList<>(transList));//Introduzco la lista en su posicion
+                        } else {
+                            tabla.get(i - 5).set(j, new ArrayList<>());//Celda vacía si falta columna
+                        }
+                    }
+                }
+                
+            }
+        }
+        return new Maquina(estados, estadosFinales, alfabeto, tabla); //Devuelvo la máquina ya cargada
+    }
+public static void main(String[] args) throws IOException {
+    if (!Arrays.asList(args).contains("-f")) {//espero bandera -f
+        System.out.println(" + Te falta el archivo"); //Mensaje si no viene
+    } else {
+        if (args.length == 3) {// Formato: -f <archivo> <cadena>
+
+            String nombre_archivo = args[Arrays.asList(args).indexOf("-f") + 1];//Cojo la ruta del archivo
+            File archivo = new File(nombre_archivo);//Transformo el archivo en un objeto File
+            if (!archivo.exists()) {//Compruebo que el archivo exista
+                System.out.println(" + No se encuentra el archivo");
+            } else {
+
+                Maquina af = loadFile(nombre_archivo);//Cargo o archivo
+                af.mostrardatos();// Imprimo info
+                System.out.println();
+                List<String> u = new ArrayList<>();// Copia del estado actual
+                
+                u.addAll(af.actual);
+                for (int i = 0; i < args[2].length(); i++) { // Voy mostrando símbolos
+                    String sym = String.valueOf(args[2].charAt(i));
+                    System.out.println("Entrada " + (i + 1) + ": '" + sym + "'");
+                }
+                
+                System.out.println();
+                for (char i : args[2].toCharArray()) {//Recorro la cadena de entrada
+                  
+                    String caracter = String.valueOf(i);//Cojo el primer caracter
+                    List<String> k = new ArrayList<>(u);//Guardo el estado anterior
+                    u = af.delta(u, caracter);//Aplico la transicion
+                    System.out.println(" δ(" + k + " , " + caracter + ") → " + u);//Imprimo por pantalla la transicion
+                }
+                
+                System.out.println();
+                if (af.aceptar(u)) {//Se comprueba si el estado actual es de aceptacion
+                    System.out.println("Cadena aceptada");
+                
+                } else {
+                
+                    System.out.println("No se acepta esta cadena");//
+                }
+            }
+        } else {
+            
+            System.out.println(" + Falta la cadena");//En caso de que no se haya pasado la cadena
+        }
+    }
+    }
+}

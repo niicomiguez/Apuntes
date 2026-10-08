@@ -1,0 +1,11 @@
+Pasos para ejecutar el archivo.
+
+1. Colocar el archivo de definición del automata en la misma ubicación que el fichero ejecutable (Maquina.jar).
+
+2. Abrir una terminal y situarse en dicha ubicación.
+
+3. Ejecutar el siguiente comando por terminal:
+java -jar Maquina.jar -f <nombre_archivo.txt> <cadena de entrada deseada>
+
+# Ejemplo: java -jar Maquina.jar -f def_automata.txt  15bd
+
