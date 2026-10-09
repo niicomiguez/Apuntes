@@ -1,0 +1,8 @@
+PID_HIJO: 8147 | Rango: 1 al 250 | Media: -1.683816 | Tiempo: 48 us
+PID_HIJO: 8149 | Rango: 251 al 500 | Media: -17.823851 | Tiempo: 45 us
+PID_HIJO: 8150 | Rango: 501 al 750 | Media: 3.739061 | Tiempo: 40 us
+PID_HIJO: 8151 | Rango: 751 al 1000 | Media: -0.779938 | Tiempo: 37 us
+
+---> [RESULTADO GLOBAL CONCURRENTE] Hijo P+1 (PID 8152) | Media final: -4.137136 | Tiempo: 135 us
+
+[CÁLCULO SECUENCIAL] Hijo P+2 (PID 8153) | Media final: -4.137136 | Tiempo: 44 us
