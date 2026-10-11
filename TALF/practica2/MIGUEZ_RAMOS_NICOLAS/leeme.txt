@@ -1,0 +1,11 @@
+1. Abrir una terminal (o consola de comandos) en esta misma carpeta donde se encuentran los archivos extraídos.
+
+2. Para iniciar el programa, ejecutar el archivo .jar pasándole el fichero de definición del autómata como argumento. Escribir el siguiente comando:
+
+   java -jar practica2.jar MIGUEZ_RAMOS_NICOLAS_definicion.txt
+
+3. Una vez iniciado el simulador, se pedirá introducir la secuencia de entrada. Escribir los símbolos separados por espacios y pulsar Enter (por ejemplo: 1 5 2 a c 2 2 b d).
+
+4. La máquina mantendrá los estados actuales de forma persistente entre distintas entradas. Para finalizar la ejecución y cerrar el programa, simplemente escribir:
+
+   salir

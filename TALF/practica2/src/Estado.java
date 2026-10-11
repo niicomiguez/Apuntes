@@ -28,7 +28,6 @@ public class Estado {
         return this.transiciones.getOrDefault(simbolo, new ArrayList<>());
     }
 
-    // --- GETTERS Y SETTERS ---
 
     public String getNombre() {
         return nombre;
@@ -50,7 +49,6 @@ public class Estado {
         this.fin = fin;
     }
 
-    // Sobrescribimos el toString para que al imprimir el objeto salga su nombre
     @Override
     public String toString() {
         return this.nombre;

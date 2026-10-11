@@ -117,21 +117,17 @@ public class Main {
                 String linea = lineas.get(i).trim();
                 if (linea.isEmpty()) continue;
 
-                // El estado actual según el orden de declaración en la primera línea
                 String nombreEstadoActual = estadosTotales[i - 3];
                 Estado estadoActual = mapaEstados.get(nombreEstadoActual);
 
                 String[] tokens = linea.split("\\s+");
                 int tokenIndex = 0;
 
-                // El número de columnas es el tamaño del alfabeto + 1 (para la cadena vacía)
                 int totalColumnas = alfabeto.size() + 1;
 
                 for (int col = 0; col < totalColumnas; col++) {
-                    // Si estamos en la última columna, el símbolo es la cadena vacía ("")
                     String simbolo = (col < alfabeto.size()) ? alfabeto.get(col) : "";
 
-                    // Leemos todos los estados destino hasta encontrar el "#" que cierra la columna
                     while (tokenIndex < tokens.length && !tokens[tokenIndex].equals("#")) {
                         String nombreDestino = tokens[tokenIndex];
                         Estado estadoDestino = mapaEstados.get(nombreDestino);
@@ -141,7 +137,6 @@ public class Main {
                         }
                         tokenIndex++;
                     }
-                    // Saltamos el símbolo "#" para avanzar a la siguiente columna
                     tokenIndex++;
                 }
             }
