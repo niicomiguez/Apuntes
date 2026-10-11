@@ -1,0 +1,36 @@
+---------APARTADO 4.1---------
+3. El programa test1 crea 2 procesos principales (con PIDs 4948 y 4949). Según la columna nTH de top, cada uno de estos procesos está compuesto por 3 hilos de ejecución. Ambos procesos se encuentran ejecutándose en el núcleo 1 (columna P).
+
+4. El programa test1 es de uso intensivo de CPU. Esto se justifica observando los valores devueltos por top:
+   - %CPU: Presenta un consumo de procesamiento sumamente elevado (~175% - 190% por proceso), lo que indica una alta carga de cálculo sobre los núcleos del procesador.
+   - %MEM y RES: El consumo de memoria RAM es prácticamente nulo (%MEM al 0,0% y una memoria residente RES de tan solo ~644 - 840 KiB por proceso), descartando que sea un programa intensivo en memoria.
+   
+5. Al enviar la señal de parada a uno de los procesos test1 (mediante "kill -STOP 4948"), el proceso cambia su estado a "T" (Stopped) y su consumo de %CPU pasa a ser del 0,0%, por lo que deja de consumir recursos del procesador y desaparece de la parte superior de la lista en top. El otro proceso test1 mantiene su ejecución normal.
+
+Al reanudar la ejecución del proceso parado mediante la señal de continuación ("kill -CONT 4948"), el proceso recupera su estado activo de ejecución y vuelve a mostrar un uso elevado de %CPU en top.
+
+7. Tras examinar los límites con "ulimit -a", se modifica el tiempo máximo de CPU a 5 segundos con "ulimit -t 5" y se lanza el programa en primer plano ("./test1").
+
+Lo que ocurre es que, tras alcanzar los 5 segundos de tiempo acumulado de procesamiento, el sistema aborta automáticamente la ejecución del programa mostrando el mensaje "Terminado (killed)".
+
+Esto se debe a que el kernel de Linux envía una señal SIGXCPU (y posteriormente SIGKILL si no se gestiona) al proceso al sobrepasar el límite de tiempo de CPU fijado por ulimit, finalizando el programa para no consumir más recursos del sistema.
+
+---------APARTADO 4.2---------
+2. Al comparar en top los recursos consumidos por ambos programas:
+   - test1 es un proceso intensivo en uso de CPU, mostrando consumos superiores al 140% por proceso pero con un uso de memoria RAM prácticamente nulo (%MEM de 0,0% y RES < 1 MiB).
+   - test2 se diferencia por ser un programa de uso intensivo de memoria RAM. A diferencia de test1, solicita y reserva una gran cantidad de memoria en el sistema, alcanzando un valor de memoria residente (RES) de 1,0 GB (%MEM del 6,4%) y una memoria virtual (VIRT) superior a 1,5 GB, reduciendo ligeramente su consumo de CPU (~59,1%).
+   
+3. Al analizar las llamadas al sistema mediante "strace -c":
+
+   - test1 realiza únicamente 23 llamadas al sistema en total, dedicando un tiempo imperceptible a syscalls (0,000000 segundos registrados en el kernel). Esto confirma que es un programa de cómputo puro cuyas instrucciones se ejecutan casi al 100% en espacio de usuario a nivel de CPU. Se observan llamadas iniciales como clone (para la creación de hilos/procesos) y la inicialización estándar del entorno.
+
+   - test2 concentra prácticamente todo su tiempo de ejecución en llamadas al sistema (un 97,21% del tiempo en la syscall "mmap" con 111 llamadas y 100 errores/reintentos por la asignación de bloques). Esto demuestra que test2 interactúa constantemente con el kernel para solicitar, mapear y gestionar grandes bloques de memoria dinámicamente.
+   
+4. Al ejecutar "getconf PAGESIZE", se confirma un tamaño de página de memoria de 4096 bytes (4 KiB).
+
+Al examinar la ejecución de "strace ./test2" sin la opción -c, una vez estabilizada la salida, se observa que el programa realiza llamadas repetidas a mmap solicitando la siguiente reserva:
+mmap(0x7ffd0f3e4f00, 536870912, PROT_NONE, MAP_FILE, -1, 0)
+
+A partir de estos parámetros se determina que:
+- Memoria solicitada en cada llamada: 536.870.912 bytes (512 MiB).
+- Número de páginas de memoria por llamada: Dividiendo los 536.870.912 bytes entre el tamaño de página (4096 bytes), se obtiene que se solicitan reservar exactamente 131.072 páginas de memoria en cada intento.
