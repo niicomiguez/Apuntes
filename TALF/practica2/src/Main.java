@@ -9,6 +9,7 @@ public class Main {
     static HashMap<String, Estado> mapaEstados = new HashMap<>();
     static List<String> alfabeto = new ArrayList<>();
     static Set<Estado> estadosActuales = new HashSet<>();
+
     public static Set<Estado> clausuraE(Set<Estado> iniciales) {
         Set<Estado> clausura = new HashSet<>(iniciales);
         Stack<Estado> pila = new Stack<>();
@@ -28,7 +29,7 @@ public class Main {
         return clausura;
     }
     public static void simular(String cadenaEntrada) {
-        // 1. Limpiamos espacios en blanco al principio y al final
+        // Limpiar espacios en blanco al principio y al final
         cadenaEntrada = cadenaEntrada.trim();
         if (cadenaEntrada.isEmpty()) return;
 
@@ -48,7 +49,7 @@ public class Main {
         String[] simbolos = cadenaEntrada.split("\\s+");
 
         for (String simbolo : simbolos) {
-            // 2. Ignoramos si por cualquier motivo queda un token vacío
+            // Ignorar si token vacío
             if (simbolo.isEmpty()) continue;
 
             Set<Estado> siguientes = new HashSet<>();
