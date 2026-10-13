@@ -18,6 +18,8 @@ void _buscarCreador(TABB *A);
 int _maxDificultadArbol(TABB A);
 int _maxDificultadCola(TCOLA *cola);
 void _buscarRetoMasDificil(TABB A);
+void _cambiarAlias(TABB *A, TIPOELEMENTOABB *creador);
+
 
 //Elimina el cambio de linea final si uso gets() o fgets()
 void _strip_line(char *linea); 
@@ -690,10 +692,10 @@ void modificarCreador(TABB *A) {
             scanf("%d", &opcion);
 
             switch (opcion) {
-                case 1:
-                    // Aquí irá la lógica de cambiar el alias y recolocar en el árbol
-                    printf("\n[En construccion: Cambiar alias]\n");
+                case 1: {
+                    _cambiarAlias(A, &creador);
                     break;
+                }
                 case 2:
                     printf("Nueva categoria (1-5): ");
                     scanf("%d", &creador.categoria);
@@ -734,5 +736,36 @@ void modificarCreador(TABB *A) {
         }
     } else {
         printf("\nError: El creador '%s' no existe en la base de datos.\n", aliasBuscar);
+    }
+}
+
+void _cambiarAlias(TABB *A, TIPOELEMENTOABB *creador) {
+    char nuevoAlias[MAX_ALIAS];
+    printf("Introduce el nuevo alias: ");
+    scanf("%s", nuevoAlias);
+
+    // Creamos un nodo temporal para comprobar si el nuevo alias ya existe
+    TIPOELEMENTOABB creadorNuevo;
+    strcpy(creadorNuevo.alias, nuevoAlias);
+
+    if (esMiembroAbb(*A, creadorNuevo)) {
+        printf("Error: Ya existe un creador con el alias '%s'. No se puede cambiar.\n", nuevoAlias);
+    } else {
+        // Guardar alias viejo antes de modificar nada
+        char aliasViejo[MAX_ALIAS];
+        strcpy(aliasViejo, creador->alias); // -> porque creador es un puntero
+
+        // Eliminar el nodo antiguo del árbol usando su clave/alias viejo
+        TIPOELEMENTOABB creadorViejo;
+        strcpy(creadorViejo.alias, aliasViejo);
+        suprimirElementoAbb(A, creadorViejo);
+
+        // Actualizar el alias en nuestra variable creador
+        strcpy(creador->alias, nuevoAlias);
+
+        // Insertar el nuevo nodo con toda su info y su nueva posición
+        insertarElementoAbb(A, *creador); 
+
+        printf("Alias modificado y creador recolocado correctamente.\n");
     }
 }
