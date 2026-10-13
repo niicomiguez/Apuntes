@@ -4,16 +4,6 @@
 #include "creatorverse.h"
 #include <string.h>
 
-// Se referencian aquí para no modificar creatorverse.h
-void nuevosRetos(TABB *A);
-void completarReto(TABB *A);
-void guardarBaseDatos(TABB A, int argc, char **argv);
-void buscarCreador(TABB A);
-void buscarRetoMasDificil(TABB A);
-void buscarCreadoresMasRetos(TABB A);
-void modificarCreador(TABB *A);
-
-
 void ejecutarMenu(TABB *arbol) {
     bool activo = true;
     char entrada[20];
