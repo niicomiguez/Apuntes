@@ -60,6 +60,7 @@ PatchPanda|2|DebugClub|339593|1|Producir una cancion sin instrumentos virtuales:
 OrbitOps|4|SoundLab|357845|1|Grabar un episodio sin usar anglicismos:4,Entrevistar a un desarrollador independiente:2,Desmontar tres mitos sobre programacion:3|Divulgador tecnologico especializado en programacion videojuegos e inteligencia artificial|
 OpcodeOwl|4|PixelUnion|516225|1|Entrevistar a un desarrollador independiente:2,Desmontar tres mitos sobre programacion:3,Grabar un episodio sin usar anglicismos:4|Podcaster de tecnologia que explica informatica mediante ejemplos cotidianos|
 OmegaOrbit|5|CodeCamp|723326|1|Anhadir una funcion elegida por votacion:3,Corregir cinco errores propuestos por la comunidad:4,Disenhar un prototipo sin usar imagenes:4,Anhadir una funcion elegida por votacion:3|Disenhador de juegos que comparte procesos de desarrollo y pruebas con la comunidad|
+OneNoise|4|PixelUnion|123143|1|Resumir la historia de Internet en cinco minutos:3,Explicar la recursividad en un minuto:5,Explicar punteros con objetos cotidianos:5|Alguien importante que está probando si su programa funciona corectamente porque tiene muchas ganas de aprobar AED|
 PhotonPatch|1|OpenStage|726417|1|-|Streamer de juegos cooperativos y retos propuestos por la comunidad|
 SideQuest|3|NightOwls|71554|1|Completar una ronda con equipamiento basico:4,Superar una marca personal en directo:4|Speedrunner centrado en superar juegos con reglas poco habituales|
 RiftCoder|4|-|120275|1|Grabar un episodio sin usar anglicismos:4,Entrevistar a un desarrollador independiente:2,Desmontar tres mitos sobre programacion:3|Divulgador tecnologico especializado en programacion videojuegos e inteligencia artificial|
@@ -75,7 +76,6 @@ ScriptSage|3|DebugClub|309124|1|Completar una ronda con equipamiento basico:4,Su
 RocketRAM|2|CodeCamp|379188|1|Crear un cartel inspirado en videojuegos retro:2|Productor de contenidos audiovisuales inspirados en tecnologia y musica electronica|
 RuntimeRex|2|NightOwls|537568|1|Crear una ilustracion usando tres colores:3|Artista digital que combina ilustracion animacion y cultura de videojuegos|
 ShaderShark|3|SoundLab|388314|1|Entrenar precision durante veinte minutos:2,Completar una ronda con equipamiento basico:4|Participante competitivo que entrena retos de precision y estrategia|
-ZeroNoise|4|PixelUnion|80680|0|Resumir la historia de Internet en cinco minutos:3,Explicar la recursividad en un minuto:5,Explicar punteros con objetos cotidianos:5|Creador de podcast sobre cultura digital proyectos y aprendizaje tecnologico|
 TurboMoth|5|OpenStage|168996|1|Corregir cinco errores propuestos por la comunidad:4,Disenhar un prototipo sin usar imagenes:4,Anhadir una funcion elegida por votacion:3,Corregir cinco errores propuestos por la comunidad:4|Programador creativo especializado en minijuegos y experiencias interactivas|
 SynthByte|1|-|211682|1|-|Creador de emisiones centradas en juegos independientes y desafios en directo|
 StackWave|3|CloudClub|269529|0|Analizar una derrota y proponer mejoras:3,Jugar una partida con una estrategia aleatoria:3|Participante competitivo que entrena retos de precision y estrategia|
