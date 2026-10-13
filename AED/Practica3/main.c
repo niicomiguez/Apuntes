@@ -8,6 +8,11 @@
 void nuevosRetos(TABB *A);
 void completarReto(TABB *A);
 void guardarBaseDatos(TABB A, int argc, char **argv);
+void buscarCreador(TABB A);
+void buscarRetoMasDificil(TABB A);
+void buscarCreadoresMasRetos(TABB A);
+void modificarCreador(TABB *A);
+
 
 void ejecutarMenu(TABB *arbol) {
     bool activo = true;
@@ -16,10 +21,15 @@ void ejecutarMenu(TABB *arbol) {
     while (activo) {
         printf("Bienvenid@ a CreatorVerse\n");
         printf("A/a. Anhadir creador\n");
-        printf("L/l. Listar creadores\n");
-        printf("E/e. Eliminar creador\n");
-        printf("N/n. Anhadir nuevo reto\n");
+        printf("B/b. Buscar creador\n");
         printf("C/c. Completar siguiente reto\n");
+        printf("D/d. Buscar reto más difícil\n");
+        printf("E/e. Eliminar creador\n");
+        printf("L/l. Listar creadores\n");
+        printf("M/m. Modificar creador\n");
+        printf("N/n. Anhadir nuevo reto\n");
+        printf("T/t. Buscar creador con más retos\n");
+
         printf("S/s. Salir\n");
         printf("Seleccione una opcion: ");
         
@@ -46,6 +56,18 @@ void ejecutarMenu(TABB *arbol) {
                 break;
              case 'c':
                 completarReto(arbol);
+                break;
+            case 'b':
+                buscarCreador(*arbol);
+                break;
+            case 'd':
+                buscarRetoMasDificil(*arbol);
+                break;
+            case 't':
+                buscarCreadoresMasRetos(*arbol);
+                break;
+            case 'm':
+                modificarCreador(arbol);
                 break;
             
             default:
