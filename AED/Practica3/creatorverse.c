@@ -19,6 +19,8 @@ int _maxDificultadArbol(TABB A);
 int _maxDificultadCola(TCOLA *cola);
 void _buscarRetoMasDificil(TABB A);
 void _cambiarAlias(TABB *A, TIPOELEMENTOABB *creador);
+void _copiarCola(TCOLA *original, TCOLA *copia);
+
 
 
 //Elimina el cambio de linea final si uso gets() o fgets()
@@ -755,17 +757,41 @@ void _cambiarAlias(TABB *A, TIPOELEMENTOABB *creador) {
         char aliasViejo[MAX_ALIAS];
         strcpy(aliasViejo, creador->alias); // -> porque creador es un puntero
 
-        // Eliminar el nodo antiguo del árbol usando su clave/alias viejo
+        TCOLA colaSegura;
+        _copiarCola(&(creador->retos), &colaSegura);
+
+        // Eliminar nodo antiguo del árbol
         TIPOELEMENTOABB creadorViejo;
         strcpy(creadorViejo.alias, aliasViejo);
         suprimirElementoAbb(A, creadorViejo);
 
-        // Actualizar el alias en nuestra variable creador
+        // Actualizar creador
         strcpy(creador->alias, nuevoAlias);
+        creador->retos = colaSegura;
 
-        // Insertar el nuevo nodo con toda su info y su nueva posición
         insertarElementoAbb(A, *creador); 
 
         printf("Alias modificado y creador recolocado correctamente.\n");
     }
+}
+
+// Función auxiliar que crea una cola nueva a partir de retos de creador 
+void _copiarCola(TCOLA *original, TCOLA *copia) {
+    crearCola(copia); 
+    TCOLA colaAuxiliar;
+    crearCola(&colaAuxiliar);
+    TIPOELEMENTOCOLA reto;
+
+    while (!esVaciaCola(*original)) {
+        reto = primeroCola(*original);
+        insertarCola(copia, reto);
+        insertarCola(&colaAuxiliar, reto);
+        suprimirCola(original);
+    }
+
+    while (!esVaciaCola(colaAuxiliar)) {
+        insertarCola(original, primeroCola(colaAuxiliar));
+        suprimirCola(&colaAuxiliar);
+    }
+    destruirCola(&colaAuxiliar);
 }

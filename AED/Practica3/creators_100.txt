@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 LunaByte|1|SoundLab|13707|0|-|Streamer de juegos cooperativos y retos propuestos por la comunidad|
 KiroBeat|2|IndieForge|22833|1|Componer una pieza con sonidos de teclado:4|Productor de contenidos audiovisuales inspirados en tecnologia y musica electronica|
 AdaLoop|4|NightOwls|41085|1|Entrevistar a un desarrollador independiente:2,Desmontar tres mitos sobre programacion:3,Grabar un episodio sin usar anglicismos:4|Podcaster de tecnologia que explica informatica mediante ejemplos cotidianos|
@@ -98,3 +99,105 @@ YieldYak|4|NeonCrew|595415|1|Grabar un episodio sin usar anglicismos:4,Entrevist
 XtraPixel|4|SoundLab|793390|1|Resumir la historia de Internet en cinco minutos:3,Explicar la recursividad en un minuto:5,Explicar punteros con objetos cotidianos:5|Creador de podcast sobre cultura digital proyectos y aprendizaje tecnologico|
 ZenithZip|5|OpenStage|604541|1|Crear un nivel usando una sola mecanica:3,Optimizar un juego para un equipo antiguo:5,Programar un minijuego en veinticuatro horas:5,Crear un nivel usando una sola mecanica:3|Disenhador de juegos que comparte procesos de desarrollo y pruebas con la comunidad|
 ZenCoder|5|IndieForge|802516|1|Disenhar un prototipo sin usar imagenes:4,Anhadir una funcion elegida por votacion:3,Corregir cinco errores propuestos por la comunidad:4,Disenhar un prototipo sin usar imagenes:4|Desarrollador de videojuegos independientes y prototipos experimentales|
+=======
+LunaByte|1|SoundLab|13707|0|-|Streamer de juegos cooperativos y retos propuestos por la comunidad|
+KiroBeat|2|IndieForge|22833|1|Componer una pieza con sonidos de teclado:4|Productor de contenidos audiovisuales inspirados en tecnologia y musica electronica|
+AdaLoop|4|NightOwls|41085|1|Entrevistar a un desarrollador independiente:2,Desmontar tres mitos sobre programacion:3,Grabar un episodio sin usar anglicismos:4|Podcaster de tecnologia que explica informatica mediante ejemplos cotidianos|
+CosmicMoth|5|PixelUnion|50211|0|Optimizar un juego para un equipo antiguo:5,Programar un minijuego en veinticuatro horas:5,Crear un nivel usando una sola mecanica:3,Optimizar un juego para un equipo antiguo:5|Programador creativo especializado en minijuegos y experiencias interactivas|
+ByteBloom|2|NightOwls|102023|1|Producir una cancion sin instrumentos virtuales:5|Creador visual especializado en pixel art disenho y experimentacion sonora|
+AstroKey|3|-|150744|1|Entrenar precision durante veinte minutos:2,Completar una ronda con equipamiento basico:4|Participante competitivo que entrena retos de precision y estrategia|
+ArcadeLynx|5|CloudClub|208591|0|Programar un minijuego en veinticuatro horas:5,Crear un nivel usando una sola mecanica:3,Optimizar un juego para un equipo antiguo:5,Programar un minijuego en veinticuatro horas:5|Desarrollador de videojuegos independientes y prototipos experimentales|
+AlphaArray|1|PixelUnion|607632|1|-|Streamer de juegos cooperativos y retos propuestos por la comunidad|
+BitBard|2|-|181213|1|Animar un escenario en treinta minutos:5|Artista digital que combina ilustracion animacion y cultura de videojuegos|
+BinaryBee|1|OpenStage|290872|1|-|Especialista en retransmisiones de estrategia y sesiones participativas|
+AudioAura|1|CodeCamp|409657|1|-|Especialista en retransmisiones de estrategia y sesiones participativas|
+BravoBuffer|2|-|616758|0|Crear un cartel inspirado en videojuegos retro:2|Productor de contenidos audiovisuales inspirados en tecnologia y musica electronica|
+CloudRider|1|NightOwls|132492|1|-|Streamer de juegos cooperativos y retos propuestos por la comunidad|
+CacheCat|3|OpenStage|229934|1|Superar una marca personal en directo:4,Entrenar precision durante veinte minutos:2|Jugador de esports especializado en competicion y analisis de partidas|
+CircuitSwan|2|SoundLab|418783|1|Animar un escenario en treinta minutos:5|Artista digital que combina ilustracion animacion y cultura de videojuegos|
+CodeComet|4|NeonCrew|159870|1|Explicar punteros con objetos cotidianos:5,Resumir la historia de Internet en cinco minutos:3,Explicar la recursividad en un minuto:5|Podcaster de tecnologia que explica informatica mediante ejemplos cotidianos|
+ConsoleCrow|4|CodeCamp|318250|1|Resumir la historia de Internet en cinco minutos:3,Explicar la recursividad en un minuto:5,Explicar punteros con objetos cotidianos:5|Creador de podcast sobre cultura digital proyectos y aprendizaje tecnologico|
+CtrlZeta|2|ArcadeHub|62428|1|Crear una ilustracion usando tres colores:3|Artista digital que combina ilustracion animacion y cultura de videojuegos|
+CryptoCanvas|3|NeonCrew|625884|1|Entrenar precision durante veinte minutos:2,Completar una ronda con equipamiento basico:4|Participante competitivo que entrena retos de precision y estrategia|
+EchoPixel|3|PixelUnion|111149|0|Ganar una partida sin usar la habilidad principal:5,Analizar una derrota y proponer mejoras:3|Jugador de esports especializado en competicion y analisis de partidas|
+DebugDruid|2|NeonCrew|220808|1|Disenhar un personaje con formas geometricas:3|Creador visual especializado en pixel art disenho y experimentacion sonora|
+DataDancer|4|DebugClub|278655|1|Entrevistar a un desarrollador independiente:2,Desmontar tres mitos sobre programacion:3,Grabar un episodio sin usar anglicismos:4|Podcaster de tecnologia que explica informatica mediante ejemplos cotidianos|
+DevDolphin|5|IndieForge|366971|0|Crear un nivel usando una sola mecanica:3,Optimizar un juego para un equipo antiguo:5,Programar un minijuego en veinticuatro horas:5,Crear un nivel usando una sola mecanica:3|Disenhador de juegos que comparte procesos de desarrollo y pruebas con la comunidad|
+DeltaDash|4|OpenStage|635010|1|Explicar punteros con objetos cotidianos:5,Resumir la historia de Internet en cinco minutos:3,Explicar la recursividad en un minuto:5|Podcaster de tecnologia que explica informatica mediante ejemplos cotidianos|
+DreamDebugger|3|IndieForge|427909|0|Jugar una partida con una estrategia aleatoria:3,Ganar una partida sin usar la habilidad principal:5|Speedrunner centrado en superar juegos con reglas poco habituales|
+GlitchFox|2|PixelUnion|141618|0|Crear un cartel inspirado en videojuegos retro:2|Productor de contenidos audiovisuales inspirados en tecnologia y musica electronica|
+FrameFrost|5|CodeCamp|287781|1|Optimizar un juego para un equipo antiguo:5,Programar un minijuego en veinticuatro horas:5,Crear un nivel usando una sola mecanica:3,Optimizar un juego para un equipo antiguo:5|Programador creativo especializado en minijuegos y experiencias interactivas|
+EpicEndian|4|ArcadeHub|437035|1|Desmontar tres mitos sobre programacion:3,Grabar un episodio sin usar anglicismos:4,Entrevistar a un desarrollador independiente:2|Creador de podcast sobre cultura digital proyectos y aprendizaje tecnologico|
+EmberEngine|5|CloudClub|644136|1|Corregir cinco errores propuestos por la comunidad:4,Disenhar un prototipo sin usar imagenes:4,Anhadir una funcion elegida por votacion:3,Corregir cinco errores propuestos por la comunidad:4|Programador creativo especializado en minijuegos y experiencias interactivas|
+FluxFalcon|5|NightOwls|446161|1|Programar un minijuego en veinticuatro horas:5,Crear un nivel usando una sola mecanica:3,Optimizar un juego para un equipo antiguo:5,Programar un minijuego en veinticuatro horas:5|Desarrollador de videojuegos independientes y prototipos experimentales|
+FiberFable|1|-|647227|0|-|Especialista en retransmisiones de estrategia y sesiones participativas|
+GameGlyph|1|SoundLab|449252|1|-|Creador de emisiones centradas en juegos independientes y desafios en directo|
+GammaGrid|2|NeonCrew|656353|1|Animar un escenario en treinta minutos:5|Artista digital que combina ilustracion animacion y cultura de videojuegos|
+IndieSpark|1|NeonCrew|251277|1|-|Streamer de juegos cooperativos y retos propuestos por la comunidad|
+HyperHeap|2|IndieForge|458378|0|Disenhar un personaje con formas geometricas:3|Creador visual especializado en pixel art disenho y experimentacion sonora|
+HexaHorizon|3|OpenStage|665479|1|Jugar una partida con una estrategia aleatoria:3,Ganar una partida sin usar la habilidad principal:5|Speedrunner centrado en superar juegos con reglas poco habituales|
+IconImpulse|4|CloudClub|674605|1|Desmontar tres mitos sobre programacion:3,Grabar un episodio sin usar anglicismos:4,Entrevistar a un desarrollador independiente:2|Creador de podcast sobre cultura digital proyectos y aprendizaje tecnologico|
+KernelKid|5|SoundLab|327376|1|Disenhar un prototipo sin usar imagenes:4,Anhadir una funcion elegida por votacion:3,Corregir cinco errores propuestos por la comunidad:4,Disenhar un prototipo sin usar imagenes:4|Desarrollador de videojuegos independientes y prototipos experimentales|
+InputIris|3|ArcadeHub|467504|1|Superar una marca personal en directo:4,Entrenar precision durante veinte minutos:2|Jugador de esports especializado en competicion y analisis de partidas|
+JitterJay|4|NightOwls|476630|1|Explicar la recursividad en un minuto:5,Explicar punteros con objetos cotidianos:5,Resumir la historia de Internet en cinco minutos:3|Divulgador tecnologico especializado en programacion videojuegos e inteligencia artificial|
+JavaJolt|5|DebugClub|683731|0|Programar un minijuego en veinticuatro horas:5,Crear un nivel usando una sola mecanica:3,Optimizar un juego para un equipo antiguo:5,Programar un minijuego en veinticuatro horas:5|Desarrollador de videojuegos independientes y prototipos experimentales|
+KarmaKernel|1|NeonCrew|686822|1|-|Creador de emisiones centradas en juegos independientes y desafios en directo|
+KeyKnight|5|PixelUnion|485756|1|Anhadir una funcion elegida por votacion:3,Corregir cinco errores propuestos por la comunidad:4,Disenhar un prototipo sin usar imagenes:4,Anhadir una funcion elegida por votacion:3|Disenhador de juegos que comparte procesos de desarrollo y pruebas con la comunidad|
+LagLegend|5|-|89806|1|Disenhar un prototipo sin usar imagenes:4,Anhadir una funcion elegida por votacion:3,Corregir cinco errores propuestos por la comunidad:4,Disenhar un prototipo sin usar imagenes:4|Desarrollador de videojuegos independientes y prototipos experimentales|
+LoopHacker|4|OpenStage|199465|1|Desmontar tres mitos sobre programacion:3,Grabar un episodio sin usar anglicismos:4,Entrevistar a un desarrollador independiente:2|Creador de podcast sobre cultura digital proyectos y aprendizaje tecnologico|
+LogicLlama|1|CloudClub|330467|0|-|Creador de emisiones centradas en juegos independientes y desafios en directo|
+LambdaLime|1|IndieForge|488847|0|-|Streamer de juegos cooperativos y retos propuestos por la comunidad|
+LaserLogic|2|OpenStage|695948|1|Disenhar un personaje con formas geometricas:3|Creador visual especializado en pixel art disenho y experimentacion sonora|
+NekoRush|3|ArcadeHub|31959|1|Analizar una derrota y proponer mejoras:3,Jugar una partida con una estrategia aleatoria:3|Participante competitivo que entrena retos de precision y estrategia|
+MatrixMuse|2|ArcadeHub|497973|1|Componer una pieza con sonidos de teclado:4|Productor de contenidos audiovisuales inspirados en tecnologia y musica electronica|
+NanoNinja|3|NightOwls|507099|1|Analizar una derrota y proponer mejoras:3,Jugar una partida con una estrategia aleatoria:3|Participante competitivo que entrena retos de precision y estrategia|
+MetaMint|3|CloudClub|705074|1|Superar una marca personal en directo:4,Entrenar precision durante veinte minutos:2|Jugador de esports especializado en competicion y analisis de partidas|
+PixelWitch|1|IndieForge|53302|1|-|Especialista en retransmisiones de estrategia y sesiones participativas|
+NovaFrame|1|ArcadeHub|92897|1|-|Creador de emisiones centradas en juegos independientes y desafios en directo|
+NeonQuest|5|NeonCrew|129401|1|Crear un nivel usando una sola mecanica:3,Optimizar un juego para un equipo antiguo:5,Programar un minijuego en veinticuatro horas:5,Crear un nivel usando una sola mecanica:3|Disenhador de juegos que comparte procesos de desarrollo y pruebas con la comunidad|
+NightCompile|5|DebugClub|248186|1|Anhadir una funcion elegida por votacion:3,Corregir cinco errores propuestos por la comunidad:4,Disenhar un prototipo sin usar imagenes:4,Anhadir una funcion elegida por votacion:3|Disenhador de juegos que comparte procesos de desarrollo y pruebas con la comunidad|
+NodeNomad|4|DebugClub|714200|0|Explicar la recursividad en un minuto:5,Explicar punteros con objetos cotidianos:5,Resumir la historia de Internet en cinco minutos:3|Divulgador tecnologico especializado en programacion videojuegos e inteligencia artificial|
+PixelDrift|3|NeonCrew|190339|1|Jugar una partida con una estrategia aleatoria:3,Ganar una partida sin usar la habilidad principal:5|Speedrunner centrado en superar juegos con reglas poco habituales|
+PatchPanda|2|DebugClub|339593|1|Producir una cancion sin instrumentos virtuales:5|Creador visual especializado en pixel art disenho y experimentacion sonora|
+OrbitOps|4|SoundLab|357845|1|Grabar un episodio sin usar anglicismos:4,Entrevistar a un desarrollador independiente:2,Desmontar tres mitos sobre programacion:3|Divulgador tecnologico especializado en programacion videojuegos e inteligencia artificial|
+OpcodeOwl|4|PixelUnion|516225|1|Entrevistar a un desarrollador independiente:2,Desmontar tres mitos sobre programacion:3,Grabar un episodio sin usar anglicismos:4|Podcaster de tecnologia que explica informatica mediante ejemplos cotidianos|
+OmegaOrbit|5|CodeCamp|723326|1|Anhadir una funcion elegida por votacion:3,Corregir cinco errores propuestos por la comunidad:4,Disenhar un prototipo sin usar imagenes:4,Anhadir una funcion elegida por votacion:3|Disenhador de juegos que comparte procesos de desarrollo y pruebas con la comunidad|
+OneNoise|4|PixelUnion|123143|1|Resumir la historia de Internet en cinco minutos:3,Explicar la recursividad en un minuto:5,Explicar punteros con objetos cotidianos:5|Alguien importante que está probando si su programa funciona corectamente porque tiene muchas ganas de aprobar AED|
+PhotonPatch|1|OpenStage|726417|1|-|Streamer de juegos cooperativos y retos propuestos por la comunidad|
+SideQuest|3|NightOwls|71554|1|Completar una ronda con equipamiento basico:4,Superar una marca personal en directo:4|Speedrunner centrado en superar juegos con reglas poco habituales|
+RiftCoder|4|-|120275|1|Grabar un episodio sin usar anglicismos:4,Entrevistar a un desarrollador independiente:2,Desmontar tres mitos sobre programacion:3|Divulgador tecnologico especializado en programacion videojuegos e inteligencia artificial|
+QuestNova|1|PixelUnion|172087|0|-|Especialista en retransmisiones de estrategia y sesiones participativas|
+QuantumQuill|1|DebugClub|370062|1|-|Streamer de juegos cooperativos y retos propuestos por la comunidad|
+ProxyPuma|5|-|525351|0|Optimizar un juego para un equipo antiguo:5,Programar un minijuego en veinticuatro horas:5,Crear un nivel usando una sola mecanica:3,Optimizar un juego para un equipo antiguo:5|Programador creativo especializado en minijuegos y experiencias interactivas|
+QueryQuartz|1|ArcadeHub|528442|1|-|Especialista en retransmisiones de estrategia y sesiones participativas|
+QuasarQueue|2|CloudClub|735543|1|Componer una pieza con sonidos de teclado:4|Productor de contenidos audiovisuales inspirados en tecnologia y musica electronica|
+RenderRaven|2|OpenStage|260403|1|Componer una pieza con sonidos de teclado:4|Productor de contenidos audiovisuales inspirados en tecnologia y musica electronica|
+RasterRogue|3|DebugClub|744669|0|Analizar una derrota y proponer mejoras:3,Jugar una partida con una estrategia aleatoria:3|Participante competitivo que entrena retos de precision y estrategia|
+RetroPulse|2|CloudClub|299998|0|Crear una ilustracion usando tres colores:3|Artista digital que combina ilustracion animacion y cultura de videojuegos|
+ScriptSage|3|DebugClub|309124|1|Completar una ronda con equipamiento basico:4,Superar una marca personal en directo:4|Speedrunner centrado en superar juegos con reglas poco habituales|
+RocketRAM|2|CodeCamp|379188|1|Crear un cartel inspirado en videojuegos retro:2|Productor de contenidos audiovisuales inspirados en tecnologia y musica electronica|
+RuntimeRex|2|NightOwls|537568|1|Crear una ilustracion usando tres colores:3|Artista digital que combina ilustracion animacion y cultura de videojuegos|
+ShaderShark|3|SoundLab|388314|1|Entrenar precision durante veinte minutos:2,Completar una ronda con equipamiento basico:4|Participante competitivo que entrena retos de precision y estrategia|
+TurboMoth|5|OpenStage|168996|1|Corregir cinco errores propuestos por la comunidad:4,Disenhar un prototipo sin usar imagenes:4,Anhadir una funcion elegida por votacion:3,Corregir cinco errores propuestos por la comunidad:4|Programador creativo especializado en minijuegos y experiencias interactivas|
+SynthByte|1|-|211682|1|-|Creador de emisiones centradas en juegos independientes y desafios en directo|
+StackWave|3|CloudClub|269529|0|Analizar una derrota y proponer mejoras:3,Jugar una partida con una estrategia aleatoria:3|Participante competitivo que entrena retos de precision y estrategia|
+SignalSprite|3|PixelUnion|546694|1|Completar una ronda con equipamiento basico:4,Superar una marca personal en directo:4|Speedrunner centrado en superar juegos con reglas poco habituales|
+SocketSoul|4|CodeCamp|753795|1|Entrevistar a un desarrollador independiente:2,Desmontar tres mitos sobre programacion:3,Grabar un episodio sin usar anglicismos:4|Podcaster de tecnologia que explica informatica mediante ejemplos cotidianos|
+SyntaxStar|3|CodeCamp|348719|1|Ganar una partida sin usar la habilidad principal:5,Analizar una derrota y proponer mejoras:3|Jugador de esports especializado en competicion y analisis de partidas|
+TokenTiger|4|IndieForge|397440|0|Explicar punteros con objetos cotidianos:5,Resumir la historia de Internet en cinco minutos:3,Explicar la recursividad en un minuto:5|Podcaster de tecnologia que explica informatica mediante ejemplos cotidianos|
+ThreadThrush|4|-|555820|0|Resumir la historia de Internet en cinco minutos:3,Explicar la recursividad en un minuto:5,Explicar punteros con objetos cotidianos:5|Creador de podcast sobre cultura digital proyectos y aprendizaje tecnologico|
+TeraTune|5|SoundLab|762921|1|Optimizar un juego para un equipo antiguo:5,Programar un minijuego en veinticuatro horas:5,Crear un nivel usando una sola mecanica:3,Optimizar un juego para un equipo antiguo:5|Programador creativo especializado en minijuegos y experiencias interactivas|
+VectorVibe|4|CloudClub|239060|0|Explicar la recursividad en un minuto:5,Explicar punteros con objetos cotidianos:5,Resumir la historia de Internet en cinco minutos:3|Divulgador tecnologico especializado en programacion videojuegos e inteligencia artificial|
+UnityUrsa|5|NeonCrew|564946|1|Disenhar un prototipo sin usar imagenes:4,Anhadir una funcion elegida por votacion:3,Corregir cinco errores propuestos por la comunidad:4,Disenhar un prototipo sin usar imagenes:4|Desarrollador de videojuegos independientes y prototipos experimentales|
+UltraUndo|1|CloudClub|766012|1|-|Especialista en retransmisiones de estrategia y sesiones participativas|
+VoxelVox|5|ArcadeHub|406566|1|Corregir cinco errores propuestos por la comunidad:4,Disenhar un prototipo sin usar imagenes:4,Anhadir una funcion elegida por votacion:3,Corregir cinco errores propuestos por la comunidad:4|Programador creativo especializado en minijuegos y experiencias interactivas|
+VirtualVega|1|NightOwls|568037|1|-|Creador de emisiones centradas en juegos independientes y desafios en directo|
+VertexVoyager|2|DebugClub|775138|0|Crear una ilustracion usando tres colores:3|Artista digital que combina ilustracion animacion y cultura de videojuegos|
+WidgetWolf|2|PixelUnion|577163|1|Producir una cancion sin instrumentos virtuales:5|Creador visual especializado en pixel art disenho y experimentacion sonora|
+WebWarden|3|CodeCamp|784264|1|Completar una ronda con equipamiento basico:4,Superar una marca personal en directo:4|Speedrunner centrado en superar juegos con reglas poco habituales|
+XenoXOR|3|-|586289|0|Ganar una partida sin usar la habilidad principal:5,Analizar una derrota y proponer mejoras:3|Jugador de esports especializado en competicion y analisis de partidas|
+YieldYak|4|NeonCrew|595415|1|Grabar un episodio sin usar anglicismos:4,Entrevistar a un desarrollador independiente:2,Desmontar tres mitos sobre programacion:3|Divulgador tecnologico especializado en programacion videojuegos e inteligencia artificial|
+XtraPixel|4|SoundLab|793390|1|Resumir la historia de Internet en cinco minutos:3,Explicar la recursividad en un minuto:5,Explicar punteros con objetos cotidianos:5|Creador de podcast sobre cultura digital proyectos y aprendizaje tecnologico|
+ZenithZip|5|OpenStage|604541|1|Crear un nivel usando una sola mecanica:3,Optimizar un juego para un equipo antiguo:5,Programar un minijuego en veinticuatro horas:5,Crear un nivel usando una sola mecanica:3|Disenhador de juegos que comparte procesos de desarrollo y pruebas con la comunidad|
+ZenCoder|5|IndieForge|802516|1|Disenhar un prototipo sin usar imagenes:4,Anhadir una funcion elegida por votacion:3,Corregir cinco errores propuestos por la comunidad:4,Disenhar un prototipo sin usar imagenes:4|Desarrollador de videojuegos independientes y prototipos experimentales|
+>>>>>>> 6778f6359481a3f2671c230d61a56f8c78ece5d4
