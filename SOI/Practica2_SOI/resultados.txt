@@ -1,8 +1,24 @@
-PID_HIJO: 8147 | Rango: 1 al 250 | Media: -1.683816 | Tiempo: 48 us
-PID_HIJO: 8149 | Rango: 251 al 500 | Media: -17.823851 | Tiempo: 45 us
-PID_HIJO: 8150 | Rango: 501 al 750 | Media: 3.739061 | Tiempo: 40 us
-PID_HIJO: 8151 | Rango: 751 al 1000 | Media: -0.779938 | Tiempo: 37 us
+PID_HIJO: 8738 | Rango: 1 al 5 | Media: -0.343121 | Tiempo: 24 us
+PID_HIJO: 8755 | Rango: 86 al 90 | Media: -0.044533 | Tiempo: 19 us
+PID_HIJO: 8752 | Rango: 71 al 75 | Media: -1.233635 | Tiempo: 20 us
+PID_HIJO: 8739 | Rango: 6 al 10 | Media: -0.363095 | Tiempo: 20 us
+PID_HIJO: 8756 | Rango: 91 al 95 | Media: 0.223404 | Tiempo: 18 us
+PID_HIJO: 8757 | Rango: 96 al 100 | Media: 0.516925 | Tiempo: 19 us
+PID_HIJO: 8742 | Rango: 21 al 25 | Media: 6.505740 | Tiempo: 23 us
+PID_HIJO: 8743 | Rango: 26 al 30 | Media: -1.637178 | Tiempo: 20 us
+PID_HIJO: 8744 | Rango: 31 al 35 | Media: -0.612084 | Tiempo: 23 us
+PID_HIJO: 8746 | Rango: 41 al 45 | Media: 0.283947 | Tiempo: 20 us
+PID_HIJO: 8747 | Rango: 46 al 50 | Media: 0.763690 | Tiempo: 20 us
+PID_HIJO: 8745 | Rango: 36 al 40 | Media: -0.122060 | Tiempo: 20 us
+PID_HIJO: 8748 | Rango: 51 al 55 | Media: 1.596515 | Tiempo: 16 us
+PID_HIJO: 8741 | Rango: 16 al 20 | Media: 2.283105 | Tiempo: 23 us
+PID_HIJO: 8740 | Rango: 11 al 15 | Media: 0.518613 | Tiempo: 19 us
+PID_HIJO: 8749 | Rango: 56 al 60 | Media: 4.965472 | Tiempo: 18 us
+PID_HIJO: 8750 | Rango: 61 al 65 | Media: -10.117649 | Tiempo: 19 us
+PID_HIJO: 8751 | Rango: 66 al 70 | Media: -2.553894 | Tiempo: 13 us
+PID_HIJO: 8753 | Rango: 76 al 80 | Media: -0.680837 | Tiempo: 19 us
+PID_HIJO: 8754 | Rango: 81 al 85 | Media: -0.327678 | Tiempo: 21 us
 
----> [RESULTADO GLOBAL CONCURRENTE] Hijo P+1 (PID 8152) | Media final: -4.137136 | Tiempo: 135 us
+---> [RESULTADO GLOBAL CONCURRENTE] Hijo P+1 (PID 8758) | Media final: -0.018918 | Tiempo: 152 us
 
-[CÁLCULO SECUENCIAL] Hijo P+2 (PID 8153) | Media final: -4.137136 | Tiempo: 44 us
+[CÁLCULO SECUENCIAL] Hijo P+2 (PID 8759) | Media final: -0.018918 | Tiempo: 32 us
