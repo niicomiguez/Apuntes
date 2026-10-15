@@ -16,6 +16,7 @@ typedef struct {
     char alias[MAX_ALIAS];
     int categoria;
     char colectivo[MAX_COLEC];
+    // Seguidores es un long en caso de que algún creador tenga muchos seguidores
     long seguidores;
     int verificado;
     TCOLA retos;

@@ -37,80 +37,82 @@ void _splitByComma(char*field, TCOLA *cola);
 // COMPLETA TODOS LOS COMENTARIOS INDICADOS EN MAYUSCULAS EN ESTA FUNCION 
 // Y EN LA FUNCION PRIVADA _splitByComma()
 ////////////////////////////////////////////////////////////////////////////////////////
+
 void inicializarCreadores(TABB *A, int nparam, char **args) {
     TIPOELEMENTOABB creador;
-    char linea[1000]; //cada linea del archivo tiene toda la informacion de un creador
-    char *token; //variable que va leyendo cada campo del creador
+    char linea[1000];
+    char *token;
 
-    //ANHADE EL CODIGO PARA CREAR EL ARBOL X
     crearAbb(A);
 
     if (nparam < 3 || strcmp(args[1], "-f") != 0) {
         fprintf(stderr, "Para cargar un archivo usa: %s -f <filename>\n", args[0]);
         return;
     }
+
     FILE *fp = fopen(args[2], "rt");
     if (fp == NULL) {
         perror("Error abriendo el archivo\n");
         return;
     }
-    while (fgets(linea, sizeof (linea), fp)) {
-        _strip_line(linea); //elimino el cambio de linea final
-        token = strtok(linea, "|"); //primer token
-        
-        int n = 0; //tengo 7 campos, contador de campos
-        while (n < 7) {
+
+    while (fgets(linea, sizeof(linea), fp)) {
+        _strip_line(linea);
+
+        // Ignoramos líneas vacías o saltos de línea sueltos al final del archivo
+        if (strlen(linea) == 0) {
+            continue;
+        }
+
+        token = strtok(linea, "|");
+        int n = 0;
+
+        // Validamos que token no sea NULL antes de procesar cada campo
+        while (token != NULL && n < 7) {
             n++;
             switch (n) {
-                case 1: //alias
-                    // ANHADE EL CODIGO PARA COPIAR EL token EN EL CAMPO alias DEL CREADOR CON strncpy X
-                    strncpy(creador.alias,token,MAX_ALIAS);
+                case 1: // Alias
+                    strncpy(creador.alias, token, MAX_ALIAS - 1);
+                    creador.alias[MAX_ALIAS - 1] = '\0';
                     break;
-                case 2: //categoria
-                    // ANHADE EL CODIGO PARA COPIAR EL token EN EL CAMPO categoria DEL CREADOR CON atoi X
+                case 2: // Categoría
                     creador.categoria = atoi(token);
                     break;
-                case 3: //colectivo
-                    // ANHADE EL CODIGO PARA COPIAR EL token EN EL CAMPO colectivo DEL CREADOR CON strncpy X
-                    strncpy(creador.colectivo,token,MAX_COLEC);
+                case 3: // Colectivo
+                    strncpy(creador.colectivo, token, MAX_COLEC - 1);
+                    creador.colectivo[MAX_COLEC - 1] = '\0';
                     break;
-                case 4: //seguidores
-                    // ANHADE EL CODIGO PARA COPIAR EL token EN EL CAMPO seguidores DEL CREADOR CON atoi X
-                    creador.seguidores=atoi(token);
+                case 4: // Seguidores
+                    creador.seguidores = atol(token);
                     break;
-                case 5: //verificado
-                    // ANHADE EL CODIGO PARA COPIAR EL token EN EL CAMPO verificado DEL CREADOR CON atoi X
-                    creador.verificado=atoi(token);
+                case 5: // Verificado
+                    creador.verificado = atoi(token);
                     break;
-                case 6: //cola de retos separados por comas
-                    // ANHADE EL CODIGO PARA CREAR LA COLA DE RETOS DEL CREADOR ACTUAL X
+                case 6: // Cola de retos
                     crearCola(&creador.retos);
-                    // ANHADE EL CODIGO SIGUIENTE: SI token ES DISTINTO DE "-", LLAMAS A LA FUNCIÓN
-                    if (strcmp(token,"-"))
-                    {
-                        _splitByComma(token,&creador.retos);
+                    if (strcmp(token, "-") != 0) {
+                        _splitByComma(token, &creador.retos);
                     }
-                    // _splitByComma MODIFICANDO LA SIGUIENTE LINEA SUSTITUYENDO EL DATO ENTRE <> POR LA VARIABLE QUE SE INDICA
-                         //_splitByComma(token, <cola de retos del creador>)
                     break;
-                case 7: //descripcion
-                    // ANHADE EL CODIGO PARA COPIAR EL token EN EL CAMPO descripcion DEL CREADOR CON strncpy
-                    strncpy(creador.descripcion,token,MAX_DESC);
+                case 7: // Descripción
+                    strncpy(creador.descripcion, token, MAX_DESC - 1);
+                    creador.descripcion[MAX_DESC - 1] = '\0';
                     break;
             }
             token = strtok(NULL, "|");
+        }
 
+        // Solo insertamos si la línea contenía los 7 campos válidos
+        if (n == 7) {
+            if (!esMiembroAbb(*A, creador)) {
+                insertarElementoAbb(A, creador);
+            } else {
+                destruirCola(&creador.retos);
+            }
         }
-        //ANHADE EL CODIGO PARA INSERTAR EL CREADOR EN EL ARBOL SOLO SI NO ES MIEMBRO DEL ARBOL
-        if (!esMiembroAbb(*A,creador))
-        {
-            insertarElementoAbb(A,creador);
-        }
-        
     }
     fclose(fp);
 }
-
 void listarCreadores(TABB A) {
     TIPOELEMENTOABB creador;
 
@@ -136,23 +138,52 @@ void anhadirCreador(TABB *A) {
     
     // Alias
     printf("Alias: ");
-    scanf("%s", creador.alias); // o fgets si quieres admitir espacios, pero ten cuidado con el buffer
+    scanf("%s", creador.alias); 
 
     // Categoría (1 a 5)
-    printf("Categoria (1-5): ");
-    scanf("%d", &creador.categoria);
+    int leidos;
+    do {
+        printf("Categoria (1-5): ");
+        leidos = scanf("%d", &creador.categoria);
+        
+        // Vaciar el buffer de entrada
+        while(getchar() != '\n');
+
+        if (leidos != 1 || creador.categoria < 1 || creador.categoria > 5) {
+            printf("Error: Categoria no valida. Debe ser un numero entre 1 y 5.\n");
+            creador.categoria = 0; // Forzar un valor inválido por si se metió una letra
+        }
+    } while (creador.categoria < 1 || creador.categoria > 5);
 
     // Colectivo (- si desconocido)
     printf("Colectivo (- si desconocido): ");
     scanf("%s", creador.colectivo);
 
     // Seguidores
-    printf("Seguidores: ");
-    scanf("%ld", &creador.seguidores);
+    do {
+        printf("Seguidores: ");
+        leidos = scanf("%ld", &creador.seguidores);
+        
+        while(getchar() != '\n'); // Limpiamos el buffer del teclado
+
+        if (leidos != 1 || creador.seguidores < 0) {
+            printf("Error: Numero de seguidores no valido. Introduce un numero entero positivo.\n");
+            creador.seguidores = -1; // Forzamos un valor invalido para repetir el bucle
+        }
+    } while (creador.seguidores < 0);
 
     // Verificado (0/1)
-    printf("Verificado (0/1): ");
-    scanf("%d", &creador.verificado);
+    do {
+        printf("Verificado (0/1): ");
+        leidos = scanf("%d", &creador.verificado);
+        
+        while(getchar() != '\n'); // Vaciar el buffer entrada
+
+        if (leidos != 1 || (creador.verificado != 0 && creador.verificado != 1)) {
+            printf("Error: Valor no valido. Introduce 0 (no) o 1 (si).\n");
+            creador.verificado = -1; // Forzar valor inválido
+        }
+    } while (creador.verificado != 0 && creador.verificado != 1);
 
     // Retos pendientes con bucle hasta "fin"
     crearCola(&creador.retos);
@@ -179,7 +210,8 @@ void eliminarCreador(TABB *A){
     printf("Introduce el alias del creador a eliminar: ");
     scanf("%s", aliasBuscar);
 
-    buscarNodoAbb(*A,aliasBuscar,&creadorEncontrado);
+    strcpy(creadorEncontrado.alias, aliasBuscar);
+    //buscarNodoAbb(*A,aliasBuscar,&creadorEncontrado);
 
     // Borrar si existe en bd
     if (esMiembroAbb(*A, creadorEncontrado)) { 
@@ -196,6 +228,7 @@ void eliminarCreador(TABB *A){
 //lee una cadena de retos y los almacena en la cola
 //el formato de cadena es "titulo1:dificultad1,titulo2:dificultad2,titulo3:dificultad3,...
 //el titulo es texto y la dificultad es un entero
+
 void _splitByComma(char *cadena, TCOLA *cola) {
     TIPOELEMENTOCOLA reto; //va a tener los campos titulo y dificultad
 
@@ -269,11 +302,20 @@ void _introducirRetosCola(TCOLA *cola) {
     
     printf("Titulo del reto (fin para finalizar): ");
     scanf(" %[^\n]", reto.titulo);
-    
+    int leidos;
     while (strcmp(reto.titulo, "fin") != 0) {
         
-        printf("Dificultad (1-5): ");
-        scanf("%d", &reto.dificultad);
+        do {
+            printf("Dificultad (1-5): ");
+            leidos = scanf("%d", &reto.dificultad);
+
+            while(getchar() != '\n');
+
+            if (leidos != 1 || reto.dificultad < 1 || reto.dificultad > 5) {
+                printf("Error: Dificultad no valida. Debe ser un numero entre 1 y 5.\n");
+                reto.dificultad = 0; 
+            }
+        } while (reto.dificultad < 1 || reto.dificultad > 5);
 
         insertarCola(cola, reto);
         
