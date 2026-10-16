@@ -728,7 +728,7 @@ void modificarCreador(TABB *A) {
             printf("2. Cambiar categoria\n");
             printf("3. Cambiar colectivo\n");
             printf("4. Cambiar numero de seguidores\n");
-            printf("5. Cambiar estado de verificacion\n");
+            printf("5. Cambiar estado de verificacion (0/1)\n");
             printf("6. Cambiar descripcion\n");
             printf("0. Volver\n");
 
@@ -741,28 +741,63 @@ void modificarCreador(TABB *A) {
                     break;
                 }
                 case 2:
-                    printf("Nueva categoria (1-5): ");
-                    scanf("%d", &creador.categoria);
+                    int leidos;
+                    do {
+                        printf("Categoria (1-5): ");
+                        leidos = scanf("%d", &creador.categoria);
+                        
+                        // Vaciar el buffer de entrada
+                        while(getchar() != '\n');
+
+                        if (leidos != 1 || creador.categoria < 1 || creador.categoria > 5) {
+                            printf("Error: Categoria no valida. Debe ser un numero entre 1 y 5.\n");
+                            creador.categoria = 0; 
+                        }
+                    } while (creador.categoria < 1 || creador.categoria > 5);
+                    
                     modificarElementoAbb(*A, creador);
                     printf("Categoria actualizada correctamente.\n");
                     break;
+                    
                 case 3:
-                    printf("Nuevo colectivo: ");
-                    scanf("%s", &creador.colectivo);
+                    printf("Nuevo colectivo (- si vacio): ");
+                    scanf("%s", creador.colectivo); // SIN EL &
                     modificarElementoAbb(*A, creador);
                     printf("Colectivo actualizado correctamente.\n");
                     break;
+                    
                 case 4:
-                    printf("Nuevos seguidores: ");
-                    scanf("%ld", &creador.seguidores);
+                    do {
+                        printf("Nuevos seguidores: ");
+                        leidos = scanf("%ld", &creador.seguidores);
+                        
+                        while(getchar() != '\n'); // Limpiamos buffer
+
+                        if (leidos != 1 || creador.seguidores < 0) {
+                            printf("Error: Numero no valido. Introduce un numero entero positivo.\n");
+                            creador.seguidores = -1;
+                        }
+                    } while (creador.seguidores < 0);
+                    
                     modificarElementoAbb(*A, creador);
                     printf("Seguidores actualizados correctamente.\n");
                     break;
+                    
                 case 5:
-                    printf("Nuevo verificado: ");
-                    scanf("%d", &creador.verificado);
+                    do {
+                        printf("Verificado (0/1): ");
+                        leidos = scanf("%d", &creador.verificado);
+                        
+                        while(getchar() != '\n');
+
+                        if (leidos != 1 || (creador.verificado != 0 && creador.verificado != 1)) {
+                            printf("Error: Valor no valido. Introduce 0 (no) o 1 (si).\n");
+                            creador.verificado = -1; 
+                        }
+                    } while (creador.verificado != 0 && creador.verificado != 1);
+                    
                     modificarElementoAbb(*A, creador);
-                    printf("Verificado actualizado correctamente.\n");
+                    printf("Verificacion actualizada correctamente.\n");
                     break;
                 case 6:
                     printf("Nueva descripción: ");
