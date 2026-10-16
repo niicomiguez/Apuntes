@@ -4,11 +4,13 @@
 #include "creatorverse.h"
 #include <string.h>
 
-void ejecutarMenu(TABB *arbol) {
+void ejecutarMenu(TABB *arbol)
+{
     bool activo = true;
     char entrada[20];
-    
-    while (activo) {
+
+    while (activo)
+    {
         printf("Bienvenid@ a CreatorVerse\n");
         printf("A/a. Anhadir creador\n");
         printf("B/b. Buscar creador\n");
@@ -22,29 +24,30 @@ void ejecutarMenu(TABB *arbol) {
 
         printf("S/s. Salir\n");
         printf("Seleccione una opcion: ");
-        
+
         scanf(" %s", &entrada);
 
-        if (strlen(entrada) == 1) {
-            switch (tolower(entrada[0])) 
+        if (strlen(entrada) == 1)
+        {
+            switch (tolower(entrada[0]))
             {
             case 's':
                 activo = false;
                 printf("\nGracias por usar nuestro programa\n");
                 break;
-             case 'a':
+            case 'a':
                 anhadirCreador(arbol);
                 break;
-             case 'l':
+            case 'l':
                 listarCreadores(*arbol);
                 break;
-             case 'e':
+            case 'e':
                 eliminarCreador(arbol);
                 break;
-             case 'n':
+            case 'n':
                 nuevosRetos(arbol);
                 break;
-             case 'c':
+            case 'c':
                 completarReto(arbol);
                 break;
             case 'b':
@@ -59,22 +62,25 @@ void ejecutarMenu(TABB *arbol) {
             case 'm':
                 modificarCreador(arbol);
                 break;
-            
+
             default:
                 printf("\nSeleccione una opción disponible\n");
                 break;
             }
-        } else {
+        }
+        else
+        {
             printf("\nSeleccione una opción disponible\n");
         }
     }
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
     // Declarar el árbol
-    TABB miArbol; 
-    
-    // Iniciamos creando el arbol y leyendo el archivo si se pasa por parámetro
+    TABB miArbol;
+
+    // Iniciar creando el arbol y leyendo el archivo si se pasa por parámetro
     inicializarCreadores(&miArbol, argc, argv);
 
     // Ejecutar el menú pasándole la dirección de nuestro árbol
