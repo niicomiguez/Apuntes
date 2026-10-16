@@ -1,3 +1,2 @@
 Línea inicial escrita por el proceso padre.
 Texto añadido por el proceso hijo.
-Texto final añadido por el proceso padre.
