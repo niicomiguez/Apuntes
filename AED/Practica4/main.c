@@ -1,56 +1,58 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include "creatornet.h"
 
-/*
- * Programa que muestra el uso del TAD grafo de números enteros
- */
-
-int main(int argc, char** argv) {
-    //Grafo de números enteros
-    TGRAFO G; //grafo
+int main(int argc, char **argv)
+{
+    TGRAFO G;
     char opcion;
 
-    //Creo el grafo
-    crearGrafo(&G);
-    do {
-        printf("\n\na. Insertar nuevo vertice\n");
-        printf("b. Eliminar vertice\n");
-        printf("c. Crear arco\n");
-        printf("d. Eliminar arco\n");
-        printf("i. Imprimir grafo\n");
-        printf("s. Salir\n");
+    inicializar(&G, argc, argv);
+
+    do
+    {
+        printf("\n--- CREATORNET ---\n");
+        printf("A/a. Anhadir creador/a\n");
+        printf("E/e. Eliminar creador/a\n");
+        printf("C/c. Crear colaboracion\n");
+        printf("B/b. Eliminar colaboracion\n");
+        printf("I/i. Mostrar red\n");
+        printf("L/l. Consultar creador/a\n");
+        printf("S/s. Salir\n");
 
         printf("Opcion: ");
-        scanf(" %c", &opcion); 
+        scanf(" %c", &opcion);
+        opcion = tolower(opcion);
 
-        switch (opcion) {
-            case 'a':case'A':
-                anhadirVertice(&G);
-                break;
-            case 'b':case 'B':
-                eliminarVertice(&G);
-                break;
-            case 'c': case 'C':
-                anhadirArco(&G);
-                break;
-            case 'd': case 'D':
-                eliminarArco(&G);
-                break;
-            case 'i': case 'I':
-                imprimirGrafo(G);
-                break;
-            case 's': case 'S':
-                opcion='s';
-                break;
-            default:
-                printf("Opción equivocada\n");
+        switch (opcion)
+        {
+        case 'a':
+            anhadirCreador(&G);
+            break;
+        case 'e':
+            eliminarCreador(&G);
+            break;
+        case 'c':
+            crearColaboracion(&G);
+            break;
+        case 'b':
+            eliminarColaboracion(&G);
+            break;
+        case 'i':
+            mostrarRed(G);
+            break;
+        case 'l':
+            consultarCreador(G);
+            break;
+        case 's':
+            break;
+        default:
+            printf("Opcion equivocada\n");
         }
     } while (opcion != 's');
 
-    //Al salir, liberamos la memoria del TAD, lo destruimos
     destruirGrafo(&G);
 
     return (EXIT_SUCCESS);
 }
-
