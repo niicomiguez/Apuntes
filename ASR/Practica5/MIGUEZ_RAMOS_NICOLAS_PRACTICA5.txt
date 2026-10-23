@@ -1,0 +1,5 @@
+1. find pruebas -perm 567
+2. find pruebas -perm -067
+3. find pruebas \( -type f -iname "*.txt" -size +9c \) -o \( -type d -name "*.bak" \)
+4. find pruebas -name "mal" -prune -o -type f -name "*.tex" -print
+5. find pruebas -path "pruebas/antiguos" -prune -o -type f -mtime +365 -exec cp {} pruebas/antiguos/ \;

@@ -1,4 +1,8 @@
 ---------APARTADO 4.1---------
+1. El paquete que contiene el comando killall se localiza con "apt-file search killall" o "dpkg -S killall", siendo el paquete "psmisc". Para instalarlo junto a las demás herramientas se ejecuta: apt update && apt install psmisc strace at dump bsdmainutils
+
+2. Ejecutando el comando "nproc" (o "lscpu"), el sistema indica que el procesador dispone de 1 núcleo lógico.
+
 3. El programa test1 crea 2 procesos principales (con PIDs 4948 y 4949). Según la columna nTH de top, cada uno de estos procesos está compuesto por 3 hilos de ejecución. Ambos procesos se encuentran ejecutándose en el núcleo 1 (columna P).
 
 4. El programa test1 es de uso intensivo de CPU. Esto se justifica observando los valores devueltos por top:
@@ -9,6 +13,8 @@
 
 Al reanudar la ejecución del proceso parado mediante la señal de continuación ("kill -CONT 4948"), el proceso recupera su estado activo de ejecución y vuelve a mostrar un uso elevado de %CPU en top.
 
+6. Se finalizan todos los procesos test1 ejecutando el comando "killall test1"
+
 7. Tras examinar los límites con "ulimit -a", se modifica el tiempo máximo de CPU a 5 segundos con "ulimit -t 5" y se lanza el programa en primer plano ("./test1").
 
 Lo que ocurre es que, tras alcanzar los 5 segundos de tiempo acumulado de procesamiento, el sistema aborta automáticamente la ejecución del programa mostrando el mensaje "Terminado (killed)".
@@ -16,6 +22,8 @@ Lo que ocurre es que, tras alcanzar los 5 segundos de tiempo acumulado de proces
 Esto se debe a que el kernel de Linux envía una señal SIGXCPU (y posteriormente SIGKILL si no se gestiona) al proceso al sobrepasar el límite de tiempo de CPU fijado por ulimit, finalizando el programa para no consumir más recursos del sistema.
 
 ---------APARTADO 4.2---------
+1. Se ejecuta "./test1" en foreground. Al pulsar CTRL-Z el proceso se detiene temporalmente. Con el comando "bg" se pasa a ejecutarse en background y con "fg" vuelve a foreground. Finalmente, con CTRL-C se interrumpe y finaliza su ejecución. Al verificar con el comando "top", se confirma que no queda ninguna instancia del proceso test1 en ejecución.
+
 2. Al comparar en top los recursos consumidos por ambos programas:
    - test1 es un proceso intensivo en uso de CPU, mostrando consumos superiores al 140% por proceso pero con un uso de memoria RAM prácticamente nulo (%MEM de 0,0% y RES < 1 MiB).
    - test2 se diferencia por ser un programa de uso intensivo de memoria RAM. A diferencia de test1, solicita y reserva una gran cantidad de memoria en el sistema, alcanzando un valor de memoria residente (RES) de 1,0 GB (%MEM del 6,4%) y una memoria virtual (VIRT) superior a 1,5 GB, reduciendo ligeramente su consumo de CPU (~59,1%).
@@ -34,3 +42,16 @@ mmap(0x7ffd0f3e4f00, 536870912, PROT_NONE, MAP_FILE, -1, 0)
 A partir de estos parámetros se determina que:
 - Memoria solicitada en cada llamada: 536.870.912 bytes (512 MiB).
 - Número de páginas de memoria por llamada: Dividiendo los 536.870.912 bytes entre el tamaño de página (4096 bytes), se obtiene que se solicitan reservar exactamente 131.072 páginas de memoria en cada intento.
+
+--------APARTADO 4.3----------
+
+1. Tras ejecutar "strace -c ./test3" durante 20 segundos y detenerlo, la salida muestra que la syscall con un mayor número de llamadas es "write" (con más de 11.500 llamadas). Esto significa que el programa dedica la inmensa mayoría de su tiempo de ejecución a solicitar al kernel que escriba datos repetidamente en un descriptor de fichero (como un archivo o un dispositivo de salida).
+
+2. Al inspeccionar el directorio /proc/<PID>/fd para el proceso test3, los enlaces simbólicos de los descriptores de fichero nos proporcionan la siguiente información:
+   - Los descriptores 0, 1 y 2 apuntan al seudofichero de dispositivo "/dev/pts/1" (la pseudoterminal del usuario).
+   - El descriptor 3 apunta al fichero regular "/tmp/hola.txt".
+Por tanto, el programa está accediendo y abriendo el archivo "/tmp/hola.txt", que es el destino sobre el cual realiza de forma masiva las llamadas al sistema "write" observadas en el punto anterior.
+
+3. Al intentar detener test3 pulsando CTRL-C, la terminal envía al proceso la señal SIGINT (Signal Interrupt). Como se observa, el programa no se detiene. Esto ocurre porque el código fuente de test3 contiene la directiva "signal(SIGINT, SIG_IGN)", la cual indica explícitamente al sistema que debe ignorar (IGN) esta señal en concreto.
+
+Al ejecutar posteriormente el comando "kill -KILL <pid>", se le envía al proceso la señal SIGKILL. A diferencia de SIGINT, la señal SIGKILL es gestionada directamente por el kernel del sistema operativo y no puede ser capturada, bloqueada ni ignorada por el programa en espacio de usuario. Por este motivo, el sistema operativo fuerza la terminación inmediata del proceso con éxito.

@@ -1,0 +1,2 @@
+gcc entregable1.c -o entregable1
+./entregable1

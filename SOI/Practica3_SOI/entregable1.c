@@ -4,12 +4,13 @@
 #include <signal.h>
 #include <sys/wait.h>
 
-/* Banderas globales modificables únicamente dentro de los manejadores (Nota 1) */
+// sig_atomic = variable no se lea nunca con datos corruptos
+// en variable normal el SO puede interrumpir la ejecución corrompiendo los datos
+// volatile = compilador no optimiza variable haciendo que se lea siempre de la RAM directamente
 volatile sig_atomic_t flag_sigusr1 = 0;
 volatile sig_atomic_t flag_alarm = 0;
 
-// alarm nos vale para contador el número de procesos creador por segundo
-// ya que el padre está en pausa y no los puede contar
+// alarm = temporizador del sistema que despierta al padre para que imprima el valor del numero de procesos
 /* Manejador de señales */
 void manejador(int numero_senhal)
 {
@@ -54,7 +55,8 @@ int main(int argc, char const *argv[])
     /* Bucle principal: se ejecuta mientras no superemos los 5 procesos */
     while (num_procesos <= 5)
     {
-        pause(); /* El padre se bloquea */
+        // Bloquear padre
+        pause();
 
         /* 1. Atender el paso de 1 segundo (SIGALRM) */
         if (flag_alarm == 1)
@@ -71,6 +73,11 @@ int main(int argc, char const *argv[])
             flag_sigusr1 = 0;
             num_procesos++;
 
+            if (num_procesos > 5)
+            {
+                break;
+            }
+
             pid_t pid_hijo = fork();
 
             if (pid_hijo < 0)
@@ -86,13 +93,6 @@ int main(int argc, char const *argv[])
                 /* Cuando el padre lo reanude al final, ejecutará exit y terminará */
                 exit(0);
             }
-
-            /* --- CÓDIGO DEL PADRE --- */
-            /* Si ya hemos creado más de 5 procesos, salimos del bucle */
-            if (num_procesos > 5)
-            {
-                break;
-            }
         }
     }
 
@@ -102,15 +102,19 @@ int main(int argc, char const *argv[])
     printf("\nLímite superado (%d procesos creados). Finalizando programa y limpiando hijos...\n", num_procesos);
     fflush(stdout);
 
-    /*
-     * Limpieza de hijos sin almacenar sus PIDs:
-     * Enviamos la señal SIGCONT a todo nuestro grupo de procesos (pasando 0 a kill).
-     * Esto reanuda a todos los hijos que estaban detenidos con SIGSTOP para que
-     * alcancen la línea exit(0) y finalicen solos.
-     */
+    // si el padre recibe señal SIGTERM, debe ignorarla (SIG_IGN)
+    // si no se ignora SIGTERM el padre se mata a sí mismo
+    signal(SIGTERM, SIG_IGN);
+
+    // Matar a todos los procesos del grupo 0
+    // Como los hijos están congelados, esta orden se queda en la pila de procesos pendientes
+    kill(0, SIGTERM);
+
+    // Indicar que todos los hijos del grupo 0 continuen su ejecución
+    // Como ya han despertado se ejecuta el sigterm pendiente
     kill(0, SIGCONT);
 
-    /* El padre espera a que absolutamente TODOS sus hijos hayan finalizado */
+    // El padre espera a que TODOS sus hijos hayan finalizado
     while (wait(NULL) > 0)
         ;
 
