@@ -55,4 +55,37 @@ void mostrarRed(TGRAFO G);
  */
 void consultarCreador(TGRAFO G);
 
+/**
+ * Muestra las estadísticas completas de toda la red
+ * @param G Grafo que contiene la red.
+ */
+void mostrarEstadisticas(TGRAFO G);
+
+/**
+ * Calcula la red de coste mínimo usando el algoritmo de Prim
+ * @param G Grafo que contiene la red.
+ */
+void redDeCosteMinimo(TGRAFO G);
+
+/**
+ * Calcula el caminimo mínimo por coste/duración entre dos vértices usando el algoritmo de Floyd-Warshall
+ * @param G Grafo que contiene la red.
+ * @param criterio 1=camino mínimo por coste ; 2=camino mínimo por duración
+ */
+void caminoMinimo(TGRAFO G, int criterio);
+
+/**
+ * Guardar la red en archivo
+ * @param G Grafo que contiene la red.
+ * @param nombreFichero Fichero donde se guarda la red
+ */
+void guardarRed(TGRAFO G, const char *nombreFichero);
+
+/**
+ * Cargar la red del archivo
+ * @param G Grafo que contiene la red.
+ * @param nombreFichero Fichero donde está guardada la red
+ */
+void cargarRed(TGRAFO *G, const char *nombreFichero);
+
 #endif /* CREATORNET_H */

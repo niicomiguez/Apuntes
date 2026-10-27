@@ -1,3 +1,7 @@
 gcc main.c creatornet.c grafo.c -o creatornet
 
 creatornet -f creatornet_version1.csv
+
+
+&=obtener dirección de una variable normal
+*=entrar en la dirección para leer o cambiar el valor

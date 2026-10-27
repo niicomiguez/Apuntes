@@ -1,0 +1,153 @@
+ls -Rl
+.:
+total 60
+drwxr-x--- 6 root      administracion  4096 jul 27 11:12 administracion
+drwxr-x--- 4 root      comercial       4096 jul 27 11:12 comercial
+drwxrwxrwt 3 root      root            4096 jul 27 11:18 comun
+drwxr-x--- 4 root      contabilidad    4096 jul 27 11:12 contabilidad
+drwxr-x--- 7 root      gerencia        4096 jul 27 11:12 gerencia
+drwx------ 2 root      root           16384 jul 27 10:04 lost+found
+drwxr-x--- 5 root      programacion    4096 jul 27 11:12 programacion
+drwxr-x--- 4 root      rrhh            4096 jul 27 11:12 rrhh
+drwxr-x--- 4 root      sistemas        4096 jul 27 11:12 sistemas
+
+./administracion:
+total 16
+drwxr-xr-x 2 juanito administracion 4096 jul 27 11:12 juanito
+drwxr-xr-x 2 juliana administracion 4096 jul 27 11:12 juliana
+drwxr-xr-x 2 pepito  administracion 4096 jul 27 11:12 pepito
+drwxrwx--- 2 root    administracion 4096 jul 27 11:12 work
+
+./administracion/juanito:
+total 0
+lrwxrwxrwx 1 root root 11 jul 27 11:12 comun -> /home/comun
+lrwxrwxrwx 1 root root 25 jul 27 11:12 work -> /home/administracion/work
+
+./administracion/juliana:
+total 0
+lrwxrwxrwx 1 root root 11 jul 27 11:12 comun -> /home/comun
+lrwxrwxrwx 1 root root 25 jul 27 11:12 work -> /home/administracion/work
+
+./administracion/pepito:
+total 0
+lrwxrwxrwx 1 root root 11 jul 27 11:12 comun -> /home/comun
+lrwxrwxrwx 1 root root 25 jul 27 11:12 work -> /home/administracion/work
+
+./administracion/work:
+total 0
+
+./comercial:
+total 8
+drwxr-xr-x 2 javierito comercial 4096 jul 27 11:12 javierito
+drwxrwx--- 2 root      comercial 4096 jul 27 11:12 work
+
+./comercial/javierito:
+total 0
+lrwxrwxrwx 1 root root 11 jul 27 11:12 comun -> /home/comun
+lrwxrwxrwx 1 root root 22 jul 27 11:12 comunJefes -> /home/comun/comunJefes
+lrwxrwxrwx 1 root root 20 jul 27 11:12 work -> /home/comercial/work
+
+./comercial/work:
+total 0
+
+./comun:
+total 4
+drwxrwx--T 2 root jefes    4096 jul 27 11:12 comunJefes
+
+./comun/comunJefes:
+total 0
+
+./contabilidad:
+total 8
+drwxr-xr-x 2 luisito contabilidad 4096 jul 27 11:12 luisito
+drwxrwx--- 2 root    contabilidad 4096 jul 27 11:12 work
+
+./contabilidad/luisito:
+total 0
+lrwxrwxrwx 1 root root 11 jul 27 11:12 comun -> /home/comun
+lrwxrwxrwx 1 root root 22 jul 27 11:12 comunJefes -> /home/comun/comunJefes
+lrwxrwxrwx 1 root root 23 jul 27 11:12 work -> /home/contabilidad/work
+
+./contabilidad/work:
+total 0
+
+./gerencia:
+total 20
+drwxr-xr-x 2 anabella gerencia 4096 jul 27 11:12 anabella
+drwxr-xr-x 2 evaita   gerencia 4096 jul 27 11:12 evaita
+drwxr-xr-x 2 jesusito gerencia 4096 jul 27 11:12 jesusito
+drwxr-xr-x 2 josefa   gerencia 4096 jul 27 11:12 josefa
+drwxrwx--- 2 root     gerencia 4096 jul 27 11:12 work
+
+./gerencia/anabella:
+total 0
+lrwxrwxrwx 1 root root 11 jul 27 11:12 comun -> /home/comun
+lrwxrwxrwx 1 root root 19 jul 27 11:12 work -> /home/gerencia/work
+
+./gerencia/evaita:
+total 0
+lrwxrwxrwx 1 root root 11 jul 27 11:12 comun -> /home/comun
+lrwxrwxrwx 1 root root 19 jul 27 11:12 work -> /home/gerencia/work
+
+./gerencia/jesusito:
+total 0
+lrwxrwxrwx 1 root root 11 jul 27 11:12 comun -> /home/comun
+lrwxrwxrwx 1 root root 22 jul 27 11:12 comunJefes -> /home/comun/comunJefes
+lrwxrwxrwx 1 root root 19 jul 27 11:12 work -> /home/gerencia/work
+
+./gerencia/josefa:
+total 0
+lrwxrwxrwx 1 root root 11 jul 27 11:12 comun -> /home/comun
+lrwxrwxrwx 1 root root 19 jul 27 11:12 work -> /home/gerencia/work
+
+./gerencia/work:
+total 0
+
+./lost+found:
+total 0
+
+./programacion:
+total 12
+drwxr-xr-x 2 antonieta programacion 4096 jul 27 11:12 antonieta
+drwxr-xr-x 2 frank     programacion 4096 jul 27 11:12 frank
+drwxrwx--- 2 root      programacion 4096 jul 27 11:12 work
+
+./programacion/antonieta:
+total 0
+lrwxrwxrwx 1 root root 11 jul 27 11:12 comun -> /home/comun
+lrwxrwxrwx 1 root root 22 jul 27 11:12 comunJefes -> /home/comun/comunJefes
+lrwxrwxrwx 1 root root 23 jul 27 11:12 work -> /home/programacion/work
+
+./programacion/frank:
+total 0
+lrwxrwxrwx 1 root root 11 jul 27 11:12 comun -> /home/comun
+lrwxrwxrwx 1 root root 23 jul 27 11:12 work -> /home/programacion/work
+
+./programacion/work:
+total 0
+
+./quota:
+total 0
+
+./rrhh:
+total 8
+drwxr-xr-x 2 marieta rrhh 4096 jul 27 11:12 marieta
+drwxrwx--- 2 root    rrhh 4096 jul 27 11:12 work
+
+./rrhh/marieta:
+total 0
+lrwxrwxrwx 1 root root 11 jul 27 11:12 comun -> /home/comun
+lrwxrwxrwx 1 root root 15 jul 27 11:12 work -> /home/rrhh/work
+
+./rrhh/work:
+total 0
+
+./sistemas:
+total 8
+drwxr-xr-x 2 puri sistemas 4096 jul 27 11:33 puri
+drwxrwx--- 2 root sistemas 4096 jul 27 11:18 work
+
+./sistemas/puri:
+total 0
+lrwxrwxrwx 1 root root     11 jul 27 11:12 comun -> /home/comun
+lrwxrwxrwx 1 root root     19 jul 27 11:12 work -> /home/sistemas/work

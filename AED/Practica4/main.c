@@ -2,11 +2,22 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include "creatornet.h"
+#include <string.h>
+
 
 int main(int argc, char **argv)
 {
     TGRAFO G;
+    crearGrafo(&G);
     char opcion;
+    char nombreFichero[100] = "";
+
+    if (argc >= 3 && strcmp(argv[1], "-f") == 0) {
+        strncpy(nombreFichero, argv[2], sizeof(nombreFichero) - 1);
+        cargarRed(&G, nombreFichero);
+    } else {
+        printf("Iniciando con una red vacia.\n");
+    }
 
     inicializar(&G, argc, argv);
 
@@ -19,6 +30,10 @@ int main(int argc, char **argv)
         printf("B/b. Eliminar colaboracion\n");
         printf("I/i. Mostrar red\n");
         printf("L/l. Consultar creador/a\n");
+        printf("T/t. Mostrar estadísticas/a\n");
+        printf("P/p. Red de colaboracion coste minimo/a\n");
+        printf("F/f. Camino minimo por coste/a\n");
+        printf("D/d. Camino minimo por duración/a\n");
         printf("S/s. Salir\n");
 
         printf("Opcion: ");
@@ -45,6 +60,17 @@ int main(int argc, char **argv)
         case 'l':
             consultarCreador(G);
             break;
+        case 't':
+            mostrarEstadisticas(G);
+            break;
+        case 'p':
+            redDeCosteMinimo(G);
+        case 'f':
+            caminoMinimo(G,1);
+            break;
+        case 'd':
+            caminoMinimo(G,2);
+            break;
         case 's':
             break;
         default:
@@ -52,7 +78,14 @@ int main(int argc, char **argv)
         }
     } while (opcion != 's');
 
+    if (strlen(nombreFichero) == 0) {
+        printf("\nIntroduce el nombre del fichero para guardar la red (ej: datos.csv): ");
+        scanf(" %99s", nombreFichero);
+    }
+
+    guardarRed(G, nombreFichero);
     destruirGrafo(&G);
 
-    return (EXIT_SUCCESS);
+    printf("Saliendo de CreatorNet. ¡Hasta pronto!\n");
+    return 0;
 }

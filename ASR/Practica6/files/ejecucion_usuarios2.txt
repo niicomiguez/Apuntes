@@ -1,0 +1,29 @@
+# ./crea_usuarios2.sh 
+
+
+usage: usuarios.py [-h] [-u U] [-d D] [-p P] [-j | -e]
+usuarios.py: error: argument -e: not allowed with argument -j
+
+
+usage: usuarios.py [-h] [-u U] [-d D] [-p P] [-j | -e]
+usuarios.py: error: unrecognized arguments: -l gerencia
+
+
+Error. El usuario evaita existe
+
+
+Error al crear el usuario jaime
+
+
+Error. No se ha indicado usuario y/o departamento
+usage: usuarios.py [-h] [-u U] [-d D] [-p P] [-j | -e]
+
+Crea usuarios
+
+options:
+  -h, --help  show this help message and exit
+  -u U        usuario
+  -d D        departamento
+  -p P        clave
+  -j          jefe
+  -e          empleado

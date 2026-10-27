@@ -1,7 +1,7 @@
 #ifndef GRAFO_H
 #define GRAFO_H
 
-#define MAXVERTICES 100 /*maximo numero de vertices*/
+#define MAXVERTICES 200 /*maximo numero de vertices*/
 
 /*
  * Implementacion estatica del TAD grafo con una matriz

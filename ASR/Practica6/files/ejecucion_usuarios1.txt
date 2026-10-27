@@ -1,0 +1,158 @@
+Usuario creado satisfactoriamente
+user:  marieta
+dep:   rrhh
+clave: Xs+MHGk7A
+home:  /home/rrhh/marieta
+gecko: marieta,rrhh
+grupo: empleados
+opciones de la contrasena puestas correctamente
+creado /home/rrhh/work
+creado /home/comun
+
+
+Usuario creado satisfactoriamente
+user:  josefa
+dep:   gerencia
+clave: DG}wEe5&
+home:  /home/gerencia/josefa
+gecko: josefa,gerencia
+grupo: empleados
+opciones de la contrasena puestas correctamente
+creado /home/gerencia/work
+creado /home/comun
+
+
+Usuario creado satisfactoriamente
+user:  anabella
+dep:   gerencia
+clave: 88TErO>V
+home:  /home/gerencia/anabella
+gecko: anabella,gerencia
+grupo: empleados
+opciones de la contrasena puestas correctamente
+creado /home/gerencia/work
+creado /home/comun
+
+
+Usuario creado satisfactoriamente
+user:  jesusito
+dep:   gerencia
+clave: Czj:8GK,
+home:  /home/gerencia/jesusito
+gecko: jesusito,gerencia
+grupo: jefes
+opciones de la contrasena puestas correctamente
+creado /home/gerencia/work
+creado /home/comun
+creado /home/comun/comunJefes
+
+
+Usuario creado satisfactoriamente
+user:  evaita
+dep:   gerencia
+clave: 5r#YkQ(zWg
+home:  /home/gerencia/evaita
+gecko: evaita,gerencia
+grupo: empleados
+opciones de la contrasena puestas correctamente
+creado /home/gerencia/work
+creado /home/comun
+
+
+Usuario creado satisfactoriamente
+user:  pepito
+dep:   administracion
+clave: I\ffzb1*}#
+home:  /home/administracion/pepito
+gecko: pepito,administracion
+grupo: empleados
+opciones de la contrasena puestas correctamente
+creado /home/administracion/work
+creado /home/comun
+
+
+Usuario creado satisfactoriamente
+user:  juanito
+dep:   administracion
+clave: Q0p$#W#coyz
+home:  /home/administracion/juanito
+gecko: juanito,administracion
+grupo: empleados
+opciones de la contrasena puestas correctamente
+creado /home/administracion/work
+creado /home/comun
+
+
+Usuario creado satisfactoriamente
+user:  juliana
+dep:   administracion
+clave: tykV9|b\
+home:  /home/administracion/juliana
+gecko: juliana,administracion
+grupo: empleados
+opciones de la contrasena puestas correctamente
+creado /home/administracion/work
+creado /home/comun
+
+
+Usuario creado satisfactoriamente
+user:  frank
+dep:   programacion
+clave: 6+gGLEshr8
+home:  /home/programacion/frank
+gecko: frank,programacion
+grupo: empleados
+opciones de la contrasena puestas correctamente
+creado /home/programacion/work
+creado /home/comun
+
+
+Usuario creado satisfactoriamente
+user:  antonieta
+dep:   programacion
+clave: 5_hOUwDw
+home:  /home/programacion/antonieta
+gecko: antonieta,programacion
+grupo: jefes
+opciones de la contrasena puestas correctamente
+creado /home/programacion/work
+creado /home/comun
+creado /home/comun/comunJefes
+
+
+Usuario creado satisfactoriamente
+user:  puri
+dep:   sistemas
+clave: oexG3W$x
+home:  /home/sistemas/puri
+gecko: puri,sistemas
+grupo: empleados
+opciones de la contrasena puestas correctamente
+creado /home/sistemas/work
+creado /home/comun
+
+
+Usuario creado satisfactoriamente
+user:  javierito
+dep:   comercial
+clave: 1=|C#@SEw
+home:  /home/comercial/javierito
+gecko: javierito,comercial
+grupo: jefes
+opciones de la contrasena puestas correctamente
+creado /home/comercial/work
+creado /home/comun
+creado /home/comun/comunJefes
+
+
+Usuario creado satisfactoriamente
+user:  luisito
+dep:   contabilidad
+clave: (-E4*zuml-)
+home:  /home/contabilidad/luisito
+gecko: luisito,contabilidad
+grupo: jefes
+opciones de la contrasena puestas correctamente
+creado /home/contabilidad/work
+creado /home/comun
+creado /home/comun/comunJefes
