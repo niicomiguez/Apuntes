@@ -771,8 +771,6 @@ void caminoMinimo(TGRAFO G, int criterio) {
     }
 }
 
-
-
 void guardarRed(TGRAFO G, const char *nombreFichero)
 {
     FILE *f = fopen(nombreFichero, "w");
