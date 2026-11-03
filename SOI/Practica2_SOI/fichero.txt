@@ -1,0 +1,10 @@
+PID_HIJO: 8256 | Rango: 11 al 16 | Media: 0.625148 | Tiempo: 23 us
+PID_HIJO: 8259 | Rango: 29 al 34 | Media: -0.828820 | Tiempo: 20 us
+PID_HIJO: 8255 | Rango: 1 al 10 | Media: -0.353108 | Tiempo: 21 us
+PID_HIJO: 8260 | Rango: 35 al 40 | Media: -0.165806 | Tiempo: 22 us
+PID_HIJO: 8257 | Rango: 17 al 22 | Media: 10.570062 | Tiempo: 23 us
+PID_HIJO: 8258 | Rango: 23 al 28 | Media: -4.420470 | Tiempo: 20 us
+
+---> [RESULTADO GLOBAL CONCURRENTE] Hijo P+1 (PID 8262) | Media final: 0.778740 | Tiempo: 87 us
+
+[CÁLCULO SECUENCIAL] Hijo P+2 (PID 8263) | Media final: 0.778740 | Tiempo: 32 us

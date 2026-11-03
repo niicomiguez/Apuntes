@@ -1,2 +1,3 @@
 gcc entregable1.c -o entregable1
 ./entregable1
+kill -SIGUSR1 <PID>

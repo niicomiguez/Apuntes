@@ -5,3 +5,25 @@ creatornet -f creatornet_version1.csv
 
 &=obtener dirección de una variable normal
 *=entrar en la dirección para leer o cambiar el valor
+
+================================================================================
+1. VECTOR DE VÉRTICES (vertices[MAX_VERTICES])
+================================================================================
+Índice | Alias      | Categoría | Colectivo
+-------+------------+-----------+------------
+0      | LunaByte   | 1         | SoundLab
+1      | AdaLoop    | 4         | NightOwls
+2      | KiroBeat   | 2         | IndieForge
+
+
+================================================================================
+2. MATRIZ DE ADYACENCIA (matriz[MAX_VERTICES][MAX_VERTICES])
+================================================================================
+
+                | LunaByte                      | AdaLoop                       | KiroBeat
+----------------+-------------------------------+-------------------------------+-------------------------------
+LunaByte        | Sin arco (0)                  | {coste: 180.00, dur: 6.5, R}  | Sin arco (0)
+----------------+-------------------------------+-------------------------------+-------------------------------
+AdaLoop         | {coste: 180.00, dur: 6.5, R}  | Sin arco (0)                  | {coste: 120.00, dur: 3.0, D}
+----------------+-------------------------------+-------------------------------+-------------------------------
+KiroBeat        | Sin arco (0)                  | {coste: 120.00, dur: 3.0, D}  | Sin arco (0)

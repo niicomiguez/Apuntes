@@ -4,8 +4,7 @@
 #include "string.h"
 #include <float.h>
 #include <string.h>
-
-
+#include <ctype.h>
 ///////////////////////////////////////////////////////////////////////////
 // PROTOTIPOS DE LAS FUNCIONES PRIVADAS ///////////////////////////////////
 // DEFINICIONES NECESARIAS PARA CARGAR EL ARCHIVO
@@ -21,6 +20,7 @@ void _strip_line(char *linea);
  * ANHADE AQUI LOS PROTOTIPOS DE LAS FUNCIONES PRIVADAS QUE CREES
  */
 //////////////////////////////////////////////////////////////////////////
+void _imprimirCaminoRec(TGRAFO G, TIPOVERTICE *vertices, int N, int P[][N], int origen, int destino);
 
 ///////////////////////////////////////////////////////////////////////////
 // IMPLEMENTACION DE LAS FUNCIONES PUBLICAS
@@ -36,82 +36,12 @@ void inicializar(TGRAFO *G, int argc, char *argv[])
         _cargarDatos(G, nombreFichero);
     }
 }
-// TUS FUNCIONES PUBLICAS
-/*
- * TODO:
- * ANHADE AQUI LA IMPLEMENTACION DE LAS FUNCIONES QUE LLAMES DESDE EL MENU
- */
-//////////////////////////////////////////////////////////////////////////
 
-///////////////////////////////////////////////////////////////////////////
 // IMPLEMENTACION DE LAS FUNCIONES PRIVADAS
 /*
  * TODO:
  * COMPLETAR LAS FUNCIONES _procesarCreador() Y _procesarColaboracion()
  */
-
-// Funcion privada que comprueba los argumentos de main
-static const char *_comprobarArgumentos(int argc, char *argv[])
-{
-    if (argc == 3 && strcmp(argv[1], "-f") == 0)
-    {
-        return argv[2];
-    }
-    fprintf(stderr, "Aviso: los argumentos de ejecución no son correctos.\n");
-    fprintf(stderr, "Uso: ./creatornet -f <fichero_datos>\n");
-    fprintf(stderr, "CreatorNet se iniciara con una red vacia.\n");
-    return NULL;
-}
-
-// Funcion privada que carga los datos del archivo
-static int _cargarDatos(TGRAFO *G, const char *nombreFichero)
-{
-    FILE *fichero;
-    char linea[TAM_LINEA];
-    char *token;
-    int cargaCorrecta = 0;
-    fichero = fopen(nombreFichero, "r");
-    if (fichero == NULL)
-    {
-        fprintf(stderr, "Aviso: no se ha podido abrir el fichero '%s'.\n", nombreFichero);
-        fprintf(stderr, "CreatorNet se iniciara con una red vacia.\n");
-        return cargaCorrecta;
-    }
-    cargaCorrecta = 1;
-    while (fgets(linea, sizeof linea, fichero))
-    {
-        _strip_line(linea);
-        token = strtok(linea, ";");
-        if (token)
-        {
-            switch (token[0])
-            {
-            case 'C':
-                _procesarCreador(G); // actua sobre token actual
-                break;
-            case 'A':
-                _procesarColaboracion(G); // actua sobre token actual
-                break;
-            default:
-                printf("Tipo de registro desconocido: %s\n", token);
-            }
-        }
-    }
-    if (ferror(fichero))
-    {
-        fprintf(stderr, "Aviso: se ha producido un error durante la "
-                        "lectura del fichero '%s'.\n",
-                nombreFichero);
-        cargaCorrecta = 0;
-    }
-    fclose(fichero);
-    return cargaCorrecta;
-}
-// Funcion privada que elimina el cambio de linea al final del string
-void _strip_line(char *linea)
-{
-    linea[strcspn(linea, "\r\n")] = 0;
-}
 
 // Funcion privada para procesar el token del creador
 static void _procesarCreador(TGRAFO *G)
@@ -226,6 +156,93 @@ static void _procesarColaboracion(TGRAFO *G)
     }
 }
 
+// Imprimir en orden cronológico el camino mínimo enre dos creadores de forma recursiva
+void _imprimirCaminoRec(TGRAFO G, TIPOVERTICE *vertices, int N, int P[][N], int origen, int destino) {
+    if (origen != destino) {
+        int previo = P[origen][destino];
+        // Llamada recursiva para imprimir el tramo anterior
+        _imprimirCaminoRec(G, vertices, N, P, origen, previo);
+        
+        // Leemos el arco entre previo y destino para obtener la modalidad ('D' o 'R')
+        TIPOARCO arco = leerArco(G, previo, destino);
+        printf(" --%c-- %s", arco.modalidad, vertices[destino].alias);
+    } else {
+        // Caso base: imprime el vértice de origen
+        printf("%s", vertices[origen].alias);
+    }
+}
+// TUS FUNCIONES PUBLICAS
+/*
+ * TODO:
+ * ANHADE AQUI LA IMPLEMENTACION DE LAS FUNCIONES QUE LLAMES DESDE EL MENU
+ */
+//////////////////////////////////////////////////////////////////////////
+
+// Funcion privada que comprueba los argumentos de main
+static const char *_comprobarArgumentos(int argc, char *argv[])
+{
+    if (argc == 3 && strcmp(argv[1], "-f") == 0)
+    {
+        return argv[2];
+    }
+    fprintf(stderr, "Aviso: los argumentos de ejecución no son correctos.\n");
+    fprintf(stderr, "Uso: ./creatornet -f <fichero_datos>\n");
+    fprintf(stderr, "CreatorNet se iniciara con una red vacia.\n");
+    return NULL;
+}
+
+// Funcion privada que carga los datos del archivo
+static int _cargarDatos(TGRAFO *G, const char *nombreFichero)
+{
+    FILE *fichero;
+    char linea[TAM_LINEA];
+    char *token;
+    int cargaCorrecta = 0;
+    fichero = fopen(nombreFichero, "r");
+    if (fichero == NULL)
+    {
+        fprintf(stderr, "Aviso: no se ha podido abrir el fichero '%s'.\n", nombreFichero);
+        fprintf(stderr, "CreatorNet se iniciara con una red vacia.\n");
+        return cargaCorrecta;
+    }
+    cargaCorrecta = 1;
+    while (fgets(linea, sizeof linea, fichero))
+    {
+        _strip_line(linea);
+        token = strtok(linea, ";");
+        if (token)
+        {
+            switch (token[0])
+            {
+            case 'C':
+                _procesarCreador(G); // actua sobre token actual
+                break;
+            case 'A':
+                _procesarColaboracion(G); // actua sobre token actual
+                break;
+            default:
+                printf("Tipo de registro desconocido: %s\n", token);
+            }
+        }
+    }
+    if (ferror(fichero))
+    {
+        fprintf(stderr, "Aviso: se ha producido un error durante la "
+                        "lectura del fichero '%s'.\n",
+                nombreFichero);
+        cargaCorrecta = 0;
+    }
+    fclose(fichero);
+    return cargaCorrecta;
+}
+// Funcion privada que elimina el cambio de linea al final del string
+void _strip_line(char *linea)
+{
+    linea[strcspn(linea, "\r\n")] = 0;
+}
+
+// ---- FUNCIONES VERSIÓN 1 ----
+
 // Opción a del menú, introducir un vertice en el grafo
 void anhadirCreador(TGRAFO *G)
 {
@@ -258,7 +275,7 @@ void anhadirCreador(TGRAFO *G)
         }
     } while (creador.categoria < 1 || creador.categoria > 5);
 
-    // 4. Pedir colectivo (si no introduce nada o pone '-', se gestiona)
+    // 4. Pedir colectivo
     printf("Introduce colectivo (o '-' si no pertenece a ninguno): ");
     scanf(" %s", creador.colectivo);
 
@@ -297,7 +314,7 @@ void crearColaboracion(TGRAFO *G)
 
     printf("\n--- NUEVA COLABORACION ---\n");
 
-    // 1. Pedir y validar alias de origen
+    // 1. Pedir y validar alias 
     do
     {
         printf("Introduce alias del/de la creador/a origen: ");
@@ -372,10 +389,7 @@ void crearColaboracion(TGRAFO *G)
         scanf(" %c", &colaboracion.modalidad);
 
         // Convertir a mayúscula si la meten en minúscula
-        if (colaboracion.modalidad == 'd')
-            colaboracion.modalidad = 'D';
-        if (colaboracion.modalidad == 'r')
-            colaboracion.modalidad = 'R';
+        colaboracion.modalidad = toupper(colaboracion.modalidad);
 
         if (colaboracion.modalidad != 'D' && colaboracion.modalidad != 'R')
         {
@@ -434,6 +448,7 @@ void eliminarColaboracion(TGRAFO *G)
     }
 }
 
+// Opción i del menú, mostrar red completa de creadores con colaboraciones
 void mostrarRed(TGRAFO G)
 {
     TIPOVERTICE *VECTOR;
@@ -462,8 +477,8 @@ void mostrarRed(TGRAFO G)
     }
 }
 
+// Opción l del menú, consultar creador con sus respectivas colaboraciones
 void consultarCreador(TGRAFO G)
-
 {
     TIPOVERTICE creador;
     TIPOVERTICE *VECTOR;
@@ -471,7 +486,6 @@ void consultarCreador(TGRAFO G)
     int pos, N, j;
     int tieneColaboraciones = 0;
 
-    printf("\n--- CONSULTAR CREADOR/A ---\n");
     printf("Alias que se desea consultar: ");
     scanf(" %s", creador.alias);
 
@@ -507,6 +521,10 @@ void consultarCreador(TGRAFO G)
         printf("El/La creador/a '%s' no tiene colaboraciones asociadas actualmente.\n", creador.alias);
     }
 }
+
+// ---- FUNCIONES VERSIÓN 2 ----
+
+// Opción t del menú, muestra estadísticas completas del grafo
 void mostrarEstadisticas(TGRAFO G) {
     TIPOVERTICE* vertices = leerVertices(G);
     int n = leerN(G);
@@ -536,6 +554,7 @@ void mostrarEstadisticas(TGRAFO G) {
                 colabCreador++;
 
                 // j > i para evaluar solamente la matriz triangular superior
+                // La matriz triangular inferior contiene arcos duplicados
                 if (j > i) {
                     TIPOARCO arco = leerArco(G, i, j);
                     colabTotales++;
@@ -558,9 +577,7 @@ void mostrarEstadisticas(TGRAFO G) {
     }
 
     // 3. Imprimir los resultados por pantalla
-    printf("\n==================================================\n");
-    printf("           ESTADISTICAS DE CREATORNET\n");
-    printf("==================================================\n");
+    printf("ESTADISTICAS DE CREATORNET\n");
     printf("[+] Creadores/as registrados: %d\n", n);
     printf("    - Categoria 1 (Streamer): %d\n", categorias[0]);
     printf("    - Categoria 2 (Artista digital/musical): %d\n", categorias[1]);
@@ -588,9 +605,9 @@ void mostrarEstadisticas(TGRAFO G) {
             }
         }
     }
-    printf("==================================================\n");
 }
 
+// Opción p del menú, usa el algoritmo de Prim para encontrar la red de coste mínimo
 void redDeCosteMinimo(TGRAFO G) {
     TIPOVERTICE *vertices = leerVertices(G);
     int N = leerN(G);
@@ -673,21 +690,7 @@ void redDeCosteMinimo(TGRAFO G) {
     printf("\nCoste total del bosque: %.2f €\n", costeTotal);
 }
 
-void imprimirCaminoRec(TGRAFO G, TIPOVERTICE *vertices, int N, int P[][N], int origen, int destino) {
-    if (origen != destino) {
-        int previo = P[origen][destino];
-        // Llamada recursiva para imprimir el tramo anterior
-        imprimirCaminoRec(G, vertices, N, P, origen, previo);
-        
-        // Leemos el arco entre previo y destino para obtener la modalidad ('D' o 'R')
-        TIPOARCO arco = leerArco(G, previo, destino);
-        printf(" --%c-- %s", arco.modalidad, vertices[destino].alias);
-    } else {
-        // Caso base: imprime el vértice de origen
-        printf("%s", vertices[origen].alias);
-    }
-}
-
+// Opciones f y d del menú, usa el algoritmo de Floyd-Warshall para obtener el camino mínimo en función del coste y duración
 void caminoMinimo(TGRAFO G, int criterio) {
     TIPOVERTICE *vertices = leerVertices(G);
     int N = leerN(G);
@@ -719,7 +722,7 @@ void caminoMinimo(TGRAFO G, int criterio) {
     int origen = posicionVertice(G, v1);
     int destino = posicionVertice(G, v2);
 
-    // 3. Declaración e inicialización de matrices D y P
+    // 3. Declaración e inicialización de matrices Distancias y Predecesores
     float D[N][N];
     int P[N][N];
 
@@ -734,6 +737,7 @@ void caminoMinimo(TGRAFO G, int criterio) {
                 D[i][j] = (criterio == 1) ? arco.coste : arco.duracion;
                 P[i][j] = i;
             } else {
+                // Si no hay arco la distancia es infinito (FLT_MAX)
                 D[i][j] = FLT_MAX;
                 P[i][j] = -1;
             }
@@ -760,7 +764,7 @@ void caminoMinimo(TGRAFO G, int criterio) {
                (criterio == 1) ? "coste" : "duracion", v1.alias, v2.alias);
     } else {
         printf("\nCamino: ");
-        imprimirCaminoRec(G, vertices, N, P, origen, destino);
+        _imprimirCaminoRec(G, vertices, N, P, origen, destino);
         printf("\n");
 
         if (criterio == 1) {
@@ -771,6 +775,7 @@ void caminoMinimo(TGRAFO G, int criterio) {
     }
 }
 
+// Opción s del menú, guardar la red completa en el archivo indicado 
 void guardarRed(TGRAFO G, const char *nombreFichero)
 {
     FILE *f = fopen(nombreFichero, "w");
@@ -815,3 +820,4 @@ void cargarRed(TGRAFO *G, const char *nombreFichero)
 {
     _cargarDatos(G, nombreFichero);
 }
+///////////////////////////////////////////////////////////////////////////

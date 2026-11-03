@@ -65,6 +65,7 @@ int main(int argc, char **argv)
             break;
         case 'p':
             redDeCosteMinimo(G);
+            break;
         case 'f':
             caminoMinimo(G,1);
             break;
@@ -83,6 +84,7 @@ int main(int argc, char **argv)
         scanf(" %99s", nombreFichero);
     }
 
+    // Guardar la red en el grafo y destruir el grafo final
     guardarRed(G, nombreFichero);
     destruirGrafo(&G);
 
