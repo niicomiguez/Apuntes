@@ -2,7 +2,10 @@
 #include <stdlib.h>
 #include <math.h>
 #include <pthread.h>
+#include <time.h>
 
+int H_GLOBAL;
+// Estructura donde los hilos guardan id, inicio, fin y la suma de su bloque
 typedef struct
 {
     int id;
@@ -18,11 +21,33 @@ void *calcular_basilea(void *arg)
 
     for (long i = datos->inicio; i <= datos->fin; i++)
     {
-        // Calculaar la potencia con pow
+        // a) Calcular la potencia con pow
         datos->suma_parcial += 1.0 / pow((double)i, 2);
     }
 
     pthread_exit(NULL);
+}
+
+// e) Función que ejecuta el hilo que crea el hilo principal para leer las sumas parciales
+void *calcular_suma_global(void *arg)
+{
+    DatosHilo *datos = (DatosHilo *)arg;
+
+    double *suma_total = malloc(sizeof(double));
+    *suma_total = 0.0;
+
+    for (int j = 0; j < H_GLOBAL; j++)
+    {
+        *suma_total += datos[j].suma_parcial;
+    }
+
+    pthread_exit((void *)suma_total);
+}
+
+// f) Calcular el tiempo transcurrido entre el inicio y fin de las operaciones
+double calcular_tiempo(struct timespec inicio, struct timespec fin)
+{
+    return (fin.tv_sec - inicio.tv_sec) + (fin.tv_nsec - inicio.tv_nsec) / 1e9;
 }
 
 int main(int argc, char const *argv[])
@@ -33,21 +58,23 @@ int main(int argc, char const *argv[])
         return 1;
     }
 
+    // b) Número de iteracciones n e hilos H son argumentos
     long n = atol(argv[1]);
-    int H = atoi(argv[2]);
+    H_GLOBAL = atoi(argv[2]);
 
-    // Calcular tamaño de bloque para cada hilo en funcion de n y H
-    long bloque = n / H;
-    long resto = n % H;
+    // c) Calcular tamaño de bloque para cada hilo en funcion de n y H
+    long bloque = n / H_GLOBAL;
+    long resto = n % H_GLOBAL;
 
     // Inicialización de los datos e hilos
-    DatosHilo datos[H];
-    pthread_t hilos[H];
+    DatosHilo datos[H_GLOBAL];
+    pthread_t hilos[H_GLOBAL];
 
     long iteraciones_acumuladas = 0;
-    for (int j = 0; j < H; j++)
+
+    for (int j = 0; j < H_GLOBAL; j++)
     {
-        // Determinamos cuántas iteraciones le tocan al hilo j
+        // c) Determinamos cuántas iteraciones le tocan al hilo j repartiendo el resto
         long iteraciones_hilo = bloque + (j < resto ? 1 : 0);
 
         // Inicializar los datos del hilo con el: id, inicio y fin
@@ -58,33 +85,56 @@ int main(int argc, char const *argv[])
         iteraciones_acumuladas += iteraciones_hilo;
 
         printf("[Hilo %d] Hace %ld iteraciones (Rango: %ld a %ld)\n", j, iteraciones_hilo, datos[j].inicio, datos[j].fin);
+    }
 
-        // Se lanza el hilo j a calcular en segundo plano
+    // g) Medir el comienzo del cálculo de la ejecución concurrente
+    struct timespec inicio_conc, fin_conc;
+    clock_gettime(CLOCK_MONOTONIC, &inicio_conc);
+
+    // d) Se lanzan los hilos j a calcular sumatorio en segundo plano y lo guardan en sus datos
+    for (int j = 0; j < H_GLOBAL; j++)
+    {
         pthread_create(&hilos[j], NULL, calcular_basilea, (void *)&datos[j]);
     }
 
-    // Hilo principal espera a que todos los n hilos finalicen su ejecución
-    for (int j = 0; j < H; j++)
+    // e) Hilo principal espera a que todos los n hilos finalicen su ejecución
+    for (int j = 0; j < H_GLOBAL; j++)
     {
         pthread_join(hilos[j], NULL);
     }
 
-    // Hilo principal muestra el resultado de sumar todas las sumas parciales de nos hijos
-    double suma_total = 0.0;
-    for (int j = 0; j < H; j++)
-    {
-        suma_total += datos[j].suma_parcial;
-    }
+    // e) Hilo principal crea un hilo nuevo para calcular el resultado final a partir de todas las contribuciones
+    pthread_t hilo_final;
+    pthread_create(&hilo_final, NULL, calcular_suma_global, (void *)datos);
 
-    printf("Resultado global de la serie de Basilea: %.15f\n", suma_total);
+    double *suma_total_ptr;
+    pthread_join(hilo_final, (void **)&suma_total_ptr);
 
-    // Hilo principal realiza el cálculo completo y compara
-    // 1. Cálculo secuencial completo por el hilo principal
+    double suma_total = *suma_total_ptr;
+    free(suma_total_ptr);
+
+    printf("Resultado global calculada por Hilo H+1: %.15f\n", suma_total);
+
+    // g) Medir el final del cálculo de la ejecución concurrente
+    clock_gettime(CLOCK_MONOTONIC, &fin_conc);
+    double tiempo_conc = calcular_tiempo(inicio_conc, fin_conc);
+
+    // g) Medir el incio del cálculo de la ejecución secuencial
+    struct timespec inicio_sec, fin_sec;
+    clock_gettime(CLOCK_MONOTONIC, &inicio_sec);
+
+    // f) Hilo principal realiza el cálculo completo y compara
+    // f.1) Cálculo secuencial completo por el hilo principal
     double suma_secuencial = 0.0;
     for (long i = 1; i <= n; i++)
     {
         suma_secuencial += 1.0 / pow((double)i, 2);
     }
+
+    // g) Medir el final del cálculo de la ejecución secuencial y calcular speedup
+    clock_gettime(CLOCK_MONOTONIC, &fin_sec);
+    double tiempo_sec = calcular_tiempo(inicio_sec, fin_sec);
+    double speedup = tiempo_sec / tiempo_conc;
 
     // 2. Valor exacto teórico (pi^2 / 6)
     double valor_exacto = (M_PI * M_PI) / 6.0;
@@ -103,6 +153,12 @@ int main(int argc, char const *argv[])
     printf("Diferencia (Paralelo vs Secuencial): %.15f\n", dif_paralelo_secuencial);
     printf("Error Relativo versión Concurrente:  %e\n", error_paralelo);
     printf("Error Relativo versión Secuencial:   %e\n", error_secuencial);
+
+    // g) Speedup entre secuencial y concurrente
+    printf("\n=== TIEMPOS Y SPEEDUP (APARTADO G) ===\n");
+    printf("Tiempo Concurrente: %.6f s\n", tiempo_conc);
+    printf("Tiempo Secuencial:  %.6f s\n", tiempo_sec);
+    printf("Speedup:            %.2fx\n", speedup);
 
     return 0;
 }

@@ -1,0 +1,6 @@
+gcc -Wall entregable1.c -o entregable1 -lpthread -lm
+./entregable1 10000000 4
+
+
+gcc -Wall entregable2.c -o entregable2 -lpthread -lm
+./entregable2 8
