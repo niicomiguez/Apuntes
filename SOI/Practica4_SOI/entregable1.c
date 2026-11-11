@@ -1,3 +1,4 @@
+#define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -17,14 +18,18 @@ typedef struct
 void *calcular_basilea(void *arg)
 {
     DatosHilo *datos = (DatosHilo *)arg;
-    datos->suma_parcial = 0.0;
+    double suma = 0.0;
 
     for (long i = datos->inicio; i <= datos->fin; i++)
     {
         // a) Calcular la potencia con pow
-        datos->suma_parcial += 1.0 / pow((double)i, 2);
+        suma += 1.0 / pow((double)i, 2);
+
+        // Comprobación apartado (c): sustituir temporalmente por:
+        // suma += 1.0; // Al final el resultado global debe dar exactamente n
     }
 
+    datos->suma_parcial = suma;
     pthread_exit(NULL);
 }
 
@@ -61,6 +66,13 @@ int main(int argc, char const *argv[])
     // b) Número de iteracciones n e hilos H son argumentos
     long n = atol(argv[1]);
     H_GLOBAL = atoi(argv[2]);
+
+    // Validación de entradas
+    if (n < 1 || H_GLOBAL < 1)
+    {
+        printf("n y H deben ser mayores que 0.\n");
+        return 1;
+    }
 
     // c) Calcular tamaño de bloque para cada hilo en funcion de n y H
     long bloque = n / H_GLOBAL;
@@ -151,8 +163,8 @@ int main(int argc, char const *argv[])
     printf("Valor Exacto Teórico (pi^2/6):   %.15f\n", valor_exacto);
     printf("--------------------------------------------------\n");
     printf("Diferencia (Paralelo vs Secuencial): %.15f\n", dif_paralelo_secuencial);
-    printf("Error Relativo versión Concurrente:  %e\n", error_paralelo);
-    printf("Error Relativo versión Secuencial:   %e\n", error_secuencial);
+    printf("Error Absoluto versión Concurrente:  %e\n", error_paralelo);
+    printf("Error Absoluto versión Secuencial:   %e\n", error_secuencial);
 
     // g) Speedup entre secuencial y concurrente
     printf("\n=== TIEMPOS Y SPEEDUP (APARTADO G) ===\n");
