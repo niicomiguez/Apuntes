@@ -1,0 +1,2 @@
+gcc -Wall entregable2.c -o entregable2
+./entregable2

@@ -1,0 +1,20 @@
+========================================================================================================================
+                                    TABLA DE RENDIMIENTO Y SPEEDUP (n = 1.000.000.000)
+========================================================================================================================
+
+Hilos (H) | Tiempo Concurrente (T_conc) | Tiempo Secuencial (T_sec) | Speedup (S) | Eficiencia | Comportamiento Observado
+----------+-----------------------------+---------------------------+-------------+------------+-----------------------------------------------------------------------------------------
+    1     |          32.203431 s        |        31.562225 s        |    0.98x    |   98.0%    | Ligeramente más lento por el overhead de creación y sincronización con pthreads.
+    2     |          30.975427 s        |        33.113397 s        |    1.07x    |   53.5%    | Mejora leve; competencia de recursos en las FPUs de los núcleos físicos.
+    4     |          19.833211 s        |        32.471097 s        |    1.64x    |   41.0%    | Uso completo de los 4 hilos lógicos del procesador. Punto de equilibrio óptimo.
+    8     |          17.695389 s        |        31.649637 s        |    1.79x    |   22.4%    | Pico de aceleración máximo. La cola de trabajo satura la pipeline de la CPU.
+   16     |          20.242297 s        |        34.015405 s        |    1.68x    |   10.5%    | Empeoramiento por sobrecarga de conmutación de contexto (Context Switch).
+   32     |          19.849433 s        |        31.580535 s        |    1.59x    |    5.0%    | Degradación asentada; exceso de hilos compitiendo por 4 CPUs lógicas.
+
+========================================================================================================================
+Notas:
+- Procesador: Intel Core (4 núcleos físicos / 4 hilos lógicos con Hyper-Threading).
+- Aceleración máxima (Speedup): 1.79x alcanzado con H = 8.
+- Fórmula de Speedup: S = T_sec / T_conc
+- Fórmula de Eficiencia: E = S / H
+========================================================================================================================
