@@ -2,7 +2,7 @@
 #define TABLA_HASH_ENCADENAMIENTO_H
 //////////////////////////////////////////////////////////////////////////////////////////
 //////MODIFICACIONES/////////////////////////////////////////////////////////////////////
-//1. TAMAÑO DE LA TABLA (CONSTANTE N): probar con distintos tamaños
+//1. TAMAÑO DE LA TABLA (CONSTANTE N): probar cosn distintos tamaños
 //2. FUNCIÓN InsertarHash(): convertirla en una función que devuelva 0 (no colisión) o 1 (colisión)
 //3. FUNCIÓN BuscarHash(): añadir el parámetro nPasosExtraB
 //4. FUNCIÓN FuncionHash(): distintas funciones, para cadenas y para enteros
@@ -16,7 +16,7 @@
 #include <string.h>
 #include "lista.h"
 
-#define N 18001 /*DEFINIR NUMERO de entradas en la tabla.*/
+#define N 11299 /*DEFINIR NUMERO de entradas en la tabla.*/
 //El factor de carga es L=n/N, donde n=datos (9000)
 //Se recomienda L<=0,5 para recolocación, es decir, N>=2n
 //Se recomienda L<=0,75 para encadenamiento, es decir, N>=4n/3

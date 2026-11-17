@@ -1,8 +1,8 @@
 #ifndef LISTA_H
 #define LISTA_H
 
-#define L 15
-//Definición del tipo de elemento almacenado en la lista
+#define L 30
+//Definiciï¿½n del tipo de elemento almacenado en la lista
 typedef struct{
     char nombre[3*L];
     char id[L];
