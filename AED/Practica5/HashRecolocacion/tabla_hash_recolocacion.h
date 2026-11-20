@@ -17,7 +17,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define N 12007 /*DEFINIR NUMERO de entradas en la tabla.*/
+#define N 22501 /*DEFINIR NUMERO de entradas en la tabla.*/
 //El factor de carga es L=n/N, donde n=datos (9000)
 //Se recomienda L<=0,5 para recolocaci�n, es decir, N>=2n
 //Se recomienda L<=0,75 para encadenamiento, es decir, N>=4n/3
@@ -27,7 +27,7 @@
 #define VACIO '\0'
 #define BORRADO ' '
 /////////CONSTANTES PARA DEFINIR LOS CAMPOS DEL TIPOELEMENTO
-#define L 15
+#define L 30
 
 typedef struct{
     char nombre[3*L];

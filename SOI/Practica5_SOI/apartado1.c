@@ -5,7 +5,7 @@ int global_init = 10;
 int global_no_init;
 int array_global[10];
 
-int main(int argc, char const *argv[])
+int main()
 {
     int local1, local2;
     int array3d[10][10][10];

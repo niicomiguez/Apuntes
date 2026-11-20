@@ -13,7 +13,7 @@ Hilos (H) | Tiempo Concurrente (T_conc) | Tiempo Secuencial (T_sec) | Speedup (S
 
 ========================================================================================================================
 Notas:
-- Procesador: Intel Core (4 núcleos físicos / 4 hilos lógicos con Hyper-Threading).
+- Procesador: Intel Core (2 núcleos físicos / 4 hilos lógicos con Hyper-Threading).
 - Aceleración máxima (Speedup): 1.79x alcanzado con H = 8.
 - Fórmula de Speedup: S = T_sec / T_conc
 - Fórmula de Eficiencia: E = S / H

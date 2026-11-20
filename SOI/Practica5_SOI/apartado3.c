@@ -18,13 +18,13 @@ int main()
     // Caso B: Reserva grande (10 MB -> supera el umbral de brk y usa mmap)
     char *ptr_grande = (char *)malloc(10 * 1024 * 1024);
     printf("\n3. Tras malloc GRANDE (10 MB) -> Direccion: %p\n", (void *)ptr_grande);
-    printf("Mira maps ahora (aparece una region nueva de ~10MB). Pulsa ENTER...");
+    printf("Aparece una region nueva de ~10MB. Pulsa ENTER...");
     getchar();
 
     // Liberamos ambos
     free(ptr_peq);
     free(ptr_grande);
-    printf("\n4. Tras FREE de ambos. Mira maps (la de 10MB desaparece, [heap] sigue igual). Pulsa ENTER...");
+    printf("\n4. Tras FREE de ambos. La región de 10MB desaparece, [heap] sigue igual. Pulsa ENTER...");
     getchar();
 
     // Nuevo malloc pequeño posterior

@@ -7,7 +7,7 @@
 
 // Cada hilo genera 1.000 millones de puntos Montecarlo por defecto
 #ifndef N_ITERACIONES
-#define N_ITERACIONES 1000000000L
+#define N_ITERACIONES 1000
 #endif
 
 // Estructura para almacenar los parámetros de entrada y los resultados de cada hilo
