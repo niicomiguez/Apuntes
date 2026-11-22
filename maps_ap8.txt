@@ -1,0 +1,31 @@
+641886219000-64188621a000 r--p 00000000 103:03 1583172                   /media/nico/6AB6F5A4B6F570C5/Users/User/Desktop/Apuntes/SOI/Practica5_SOI/apartado8
+64188621a000-64188621b000 r-xp 00001000 103:03 1583172                   /media/nico/6AB6F5A4B6F570C5/Users/User/Desktop/Apuntes/SOI/Practica5_SOI/apartado8
+64188621b000-64188621c000 r--p 00002000 103:03 1583172                   /media/nico/6AB6F5A4B6F570C5/Users/User/Desktop/Apuntes/SOI/Practica5_SOI/apartado8
+64188621c000-64188621d000 r--p 00002000 103:03 1583172                   /media/nico/6AB6F5A4B6F570C5/Users/User/Desktop/Apuntes/SOI/Practica5_SOI/apartado8
+64188621d000-64188621e000 rw-p 00003000 103:03 1583172                   /media/nico/6AB6F5A4B6F570C5/Users/User/Desktop/Apuntes/SOI/Practica5_SOI/apartado8
+6418ab6c9000-6418ab6ea000 rw-p 00000000 00:00 0                          [heap]
+73fd48000000-73fd48021000 rw-p 00000000 00:00 0 
+73fd48021000-73fd4c000000 ---p 00000000 00:00 0 
+73fd50000000-73fd50021000 rw-p 00000000 00:00 0 
+73fd50021000-73fd54000000 ---p 00000000 00:00 0 
+73fd549fe000-73fd549ff000 ---p 00000000 00:00 0 
+73fd549ff000-73fd551ff000 rw-p 00000000 00:00 0 
+73fd551ff000-73fd55200000 ---p 00000000 00:00 0 
+73fd55200000-73fd55a00000 rw-p 00000000 00:00 0 
+73fd55a00000-73fd55a28000 r--p 00000000 103:05 1475259                   /usr/lib/x86_64-linux-gnu/libc.so.6
+73fd55a28000-73fd55bb1000 r-xp 00028000 103:05 1475259                   /usr/lib/x86_64-linux-gnu/libc.so.6
+73fd55bb1000-73fd55c00000 r--p 001b1000 103:05 1475259                   /usr/lib/x86_64-linux-gnu/libc.so.6
+73fd55c00000-73fd55c04000 r--p 001ff000 103:05 1475259                   /usr/lib/x86_64-linux-gnu/libc.so.6
+73fd55c04000-73fd55c06000 rw-p 00203000 103:05 1475259                   /usr/lib/x86_64-linux-gnu/libc.so.6
+73fd55c06000-73fd55c13000 rw-p 00000000 00:00 0 
+73fd55c7f000-73fd55c82000 rw-p 00000000 00:00 0 
+73fd55c93000-73fd55c95000 rw-p 00000000 00:00 0 
+73fd55c95000-73fd55c99000 r--p 00000000 00:00 0                          [vvar]
+73fd55c99000-73fd55c9b000 r-xp 00000000 00:00 0                          [vdso]
+73fd55c9b000-73fd55c9c000 r--p 00000000 103:05 1475256                   /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+73fd55c9c000-73fd55cc7000 r-xp 00001000 103:05 1475256                   /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+73fd55cc7000-73fd55cd1000 r--p 0002c000 103:05 1475256                   /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+73fd55cd1000-73fd55cd3000 r--p 00036000 103:05 1475256                   /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+73fd55cd3000-73fd55cd5000 rw-p 00038000 103:05 1475256                   /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+7ffc2268d000-7ffc226af000 rw-p 00000000 00:00 0                          [stack]
+ffffffffff600000-ffffffffff601000 --xp 00000000 00:00 0                  [vsyscall]
