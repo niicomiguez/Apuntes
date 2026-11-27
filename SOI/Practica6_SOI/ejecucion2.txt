@@ -1,0 +1,3 @@
+gcc -Wall -Wextra entregable2.c -o entregable2
+./entregable2 10 10000 4
+strace -f -c ./entregable2 10 10000 4
